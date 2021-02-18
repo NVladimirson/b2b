@@ -11,8 +11,30 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        // \App\Models\User\UserInfo::factory(10)->create();
+        // \App\Models\User\UserPermission::factory(10)->create();
+        {
+          $this->call([
+            UserSeeder::class,
+            UserInfoSeeder::class,
+            UserPermissionSeeder::class,
+
+            CategorySeeder::class,
+            CategoryNameSeeder::class,
+
+            ProductSeeder::class,
+            ProductNameSeeder::class,
+            #ProductOptionSeeder::class,
+            #ProductOptionNameSeeder::class,
+
+          ]);
+        }
+
     }
+    // public function run()
+
 }

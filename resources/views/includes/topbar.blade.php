@@ -53,7 +53,7 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
+                <span class="badge badge-danger badge-counter">0</span>
             </a>
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -104,7 +104,7 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">7</span>
+                <span class="badge badge-danger badge-counter">0</span>
             </a>
             <!-- Dropdown - Messages -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -168,30 +168,74 @@
 
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown">
+          <!-- <a href="#" class="dropdown-toggle pr-2 pl-2 pr-sm-4 pl-sm-4" data-toggle="dropdown">
+              <span class="flag-icon flag-icon-{{ LaravelLocalization::getCurrentLocale() }}" title="{{ LaravelLocalization::getCurrentLocale() }}"></span>
+              <span class="name d-none d-sm-inline">{{ mb_strtoupper(LaravelLocalization::getCurrentLocale()) }}</span> <b class="caret"></b>
+          </a>
+          <div class="dropdown-menu">
+          @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                  <a rel="alternate"  hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="dropdown-item"><span class="flag-icon flag-icon-{{$localeCode}}" title="{{$localeCode}}"></span> {{ $properties['native'] }}</a>
+          @endforeach
+          </div> -->
+
+
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">En</span>
+                <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">En</span> -->
+
+                @switch(LaravelLocalization::getCurrentLocale())
+                    @case('uk')
+                    <span class="flag-icon flag-icon-ua" title="{{ LaravelLocalization::getCurrentLocale() }}"></span>
+                     @break
+                    @case('en')
+                    <span class="flag-icon flag-icon-us" title="{{ LaravelLocalization::getCurrentLocale() }}"></span>
+                     @break
+                    @case('ru')
+                    <span class="flag-icon flag-icon-ru" title="{{ LaravelLocalization::getCurrentLocale() }}"></span>
+                     @break
+                    @default
+                    <span class="flag-icon flag-icon-{{ LaravelLocalization::getCurrentLocale() }}" title="{{ LaravelLocalization::getCurrentLocale() }}"></span>
+                @endswitch
+                <span class="name d-none d-sm-inline">{{ mb_strtoupper(LaravelLocalization::getCurrentLocale()) }}</span> <b class="caret"></b>
                 <!-- <img class="img-profile rounded-circle"
                     src="/img/undraw_profile.svg"> -->
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <!-- <a class="dropdown-item" href="#"> -->
                     <!-- <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> -->
-                    Ru
-                </a>
-                <a class="dropdown-item" href="#">
+
+                <!-- </a> -->
+                <!-- <a class="dropdown-item" href="#"> -->
                     <!-- <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> -->
-                    Uk
-                </a>
+
+                <!-- </a> -->
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <a rel="alternate"  hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                        class="dropdown-item">
+                        @switch($localeCode)
+                            @case('uk')
+                            <span class="flag-icon flag-icon-ua" title="{{ LaravelLocalization::getCurrentLocale() }}"></span>
+                             @break
+                            @case('en')
+                            <span class="flag-icon flag-icon-us" title="{{ LaravelLocalization::getCurrentLocale() }}"></span>
+                             @break
+                            @case('ru')
+                            <span class="flag-icon flag-icon-ru" title="{{ LaravelLocalization::getCurrentLocale() }}"></span>
+                             @break
+                            @default
+                            <span class="flag-icon flag-icon-{{$localeCode}}" title="{{$localeCode}}"></span>
+                        @endswitch
+                        {{ $properties['native'] }}</a>
+                @endforeach
             </div>
         </li>
 
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{auth()->user()->name}}</span>
                 <img class="img-profile rounded-circle"
                     src="/img/undraw_profile.svg">
             </a>

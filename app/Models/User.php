@@ -40,4 +40,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getInfo(){
+      return $this->hasOne('App\User\UserInfo','id','user_id');
+    }
+
+    public function getPermission(){
+      return $this->hasOne('App\User\UserPermission','id','user_id');
+    }
 }
