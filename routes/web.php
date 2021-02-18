@@ -47,7 +47,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
         Route::get('/company/login-as-user/{id}','CompanyController@loginAsUser')->name('company.login_as_user');
 
 		Route::get('/products/test','Product\ProductController@test')->name('products.test');
-		Route::get('/products','App\Http\Controllers\Product\ProductController@index')->name('products');
+		Route::get('/products','App\Http\Controllers\Product\ProductController@index')->name('products.all');
 		Route::get('/products_v2','Product\ProductController@index_v2')->name('products_v2');
 		Route::get('/products/category/{id}','Product\ProductController@category')->name('products.category');
 		Route::get('/products/all-ajax','Product\ProductController@allAjax')->name('products.all_ajax');
@@ -74,7 +74,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
     // Route::get('/catalogs/add-to-catalog/{ids}','Product\CatalogController@addToCatalogMultiple')->name('catalogs.add_to_catalog_multiple');
 		Route::get('/catalogs/change-storage/','Product\CatalogController@changeStorage')->name('catalogs.change_storage');
 
-		Route::get('/orders','Order\OrderController@index')->name('orders');
+		Route::get('/orders','\App\Http\Controllers\Order\OrderController@index')->name('orders');
 		Route::get('/orders/create','Order\OrderController@create')->name('orders.create');
 		Route::get('/orders/all-ajax/','Order\OrderController@allAjax')->name('orders.all_ajax');
 		Route::get('/orders/find/','Order\OrderController@find')->name('orders.find');

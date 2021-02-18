@@ -47,7 +47,7 @@ class ProductController extends Controller
         // $filters = CategoryServices::getOptionFilters();
         // //dd($filters);
         // $dinmark_url = \Config::get('values.dinmarkurl');
-        return view('product.all'
+        return view('products.index'
         //,compact('wishlists', 'orders', 'terms','filters','dinmark_url')
       );
     }

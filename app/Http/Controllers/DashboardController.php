@@ -171,7 +171,7 @@ class DashboardController extends Controller
 //         }
 
     SEOTools::setTitle(trans('dashboard.page_name'));
-    return view('dashboard'
+    return view('home'
     // ,compact(
     //     'order_counts',
     //         'success_procent',

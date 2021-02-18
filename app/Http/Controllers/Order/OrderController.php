@@ -31,37 +31,39 @@ class OrderController extends Controller
 {
 	public function index(){
 
-		SEOTools::setTitle(trans('order.page_list'));
-		$statuses = OrderStatus::all();
+		// SEOTools::setTitle(trans('order.page_list'));
+		// $statuses = OrderStatus::all();
+		//
+    //     $sendersId =  Order::whereHas('getUser', function ($users){
+    //             $users->where('company',auth()->user()->company);
+    //         })
+    //         ->groupBy('sender_id')
+    //         ->pluck('sender_id');
+		// 				//[0=>0]
+    //     $senders = User::whereIn('id',$sendersId)->pluck('id','name')->toArray();
+    //     if($sendersId->has(0)){
+    //         $senders = array_merge(['Dinmark'=>0],$senders);
+    //     }
+    //     $customersId =  Order::whereHas('getUser', function ($users){
+    //             $users->where('company',auth()->user()->company);
+    //         })
+    //         ->groupBy('customer_id')
+    //         ->pluck('customer_id');
+    //     $customers = User::whereIn('id',$customersId)->pluck('id','name')->toArray();
+    //     foreach ($customersId as $id){
+    //         if($id < 0){
+    //             $client = Client::find(-$id);
+    //             if($client){
+    //                 $customers[$client->name] = $id;
+    //             }
+    //         }
+    //     }
+		//
+		// 		$locale = CategoryServices::getLang();
 
-        $sendersId =  Order::whereHas('getUser', function ($users){
-                $users->where('company',auth()->user()->company);
-            })
-            ->groupBy('sender_id')
-            ->pluck('sender_id');
-						//[0=>0]
-        $senders = User::whereIn('id',$sendersId)->pluck('id','name')->toArray();
-        if($sendersId->has(0)){
-            $senders = array_merge(['Dinmark'=>0],$senders);
-        }
-        $customersId =  Order::whereHas('getUser', function ($users){
-                $users->where('company',auth()->user()->company);
-            })
-            ->groupBy('customer_id')
-            ->pluck('customer_id');
-        $customers = User::whereIn('id',$customersId)->pluck('id','name')->toArray();
-        foreach ($customersId as $id){
-            if($id < 0){
-                $client = Client::find(-$id);
-                if($client){
-                    $customers[$client->name] = $id;
-                }
-            }
-        }
-
-				$locale = CategoryServices::getLang();
-
-		return view('order.index',compact('statuses', 'senders','customers','locale'));
+		return view('orders.index'
+		//,compact('statuses', 'senders','customers','locale')
+		);
 	}
 
 	public function addToOrder($id, Request $request){
@@ -475,7 +477,7 @@ class OrderController extends Controller
             }
             $weight += $orderProduct->product->weight * $orderProduct->quantity/100;
 
-					
+
 			$products[] = [
 				'id'	=> $orderProduct->id,
 				'product_id'	=> $orderProduct->product->id,
