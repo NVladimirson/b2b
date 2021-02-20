@@ -169,7 +169,6 @@ class DashboardController extends Controller
 //                 ];
 //             }
 //         }
-    dd(auth()->user());
     SEOTools::setTitle(trans('dashboard.page_name'));
     return view('home'
     // ,compact(

@@ -17,7 +17,7 @@
     <li class="nav-item active">
         <a class="nav-link" href="{{route('home')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Home</span></a>
+            <span>@lang('layout_sidebar_topbar.sidebar.home')</span></a>
     </li>
 
     <!-- Divider -->
@@ -33,14 +33,14 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Products</span>
+            <span>@lang('layout_sidebar_topbar.sidebar.products.name')</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Products Categories:</h6>
+                <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.products.actions'):</h6>
                 <!-- <a class="collapse-item" href="buttons.html">Buttons</a>
                 <a class="collapse-item" href="cards.html">Cards</a> -->
-                <a class="collapse-item" href="{{route('products.all')}}">All Products</a>
+                <a class="collapse-item" href="{{route('products.all')}}">@lang('layout_sidebar_topbar.sidebar.products.all')</a>
             </div>
         </div>
     </li>
@@ -50,13 +50,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-shopping-cart"></i>
-            <span>Orders</span>
+            <span>@lang('layout_sidebar_topbar.sidebar.orders.name')</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Orders Categories:</h6>
-                <a class="collapse-item" href="{{route('orders')}}">All Orders</a>
+                <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.orders.actions'):</h6>
+                <a class="collapse-item" href="{{route('orders')}}">@lang('layout_sidebar_topbar.sidebar.orders.all')</a>
             </div>
         </div>
     </li>

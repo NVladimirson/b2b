@@ -23,16 +23,25 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 	]],function() {
 
 		Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('home');
+		Route::get('/products/test','Product\ProductController@test')->name('products.test');
+		Route::get('/products','App\Http\Controllers\Product\ProductController@index')->name('products.all');
+		Route::get('/orders','\App\Http\Controllers\Order\OrderController@index')->name('orders');
+		Route::get('/products/datatable','\App\Http\Controllers\Product\ProductController@datatableIndex')->name('products.datatable');
+		Route::get('/profile','\App\Http\Controllers\User\UserController@profile')->name('user.profile');
+		Route::get('/profile/settings','\App\Http\Controllers\User\UserController@settings')->name('user.settings');
+		Route::get('/profile/log','\App\Http\Controllers\User\UserController@log')->name('user.log');
+
+
         Route::get('/globalSearch', 'DashboardController@globalSearch')->name('globalsearch');
 				Route::get('/extendedSearch', 'DashboardController@extendedSearch')->name('extendedSearch');
 
-		Route::get('/profile','UserController@profile')->name('user.profile');
-		Route::post('/profile/data','UserController@updateData')->name('user.profile.update_data');
-		Route::post('/profile/password','UserController@updatePassword')->name('user.profile.update_password');
-		Route::post('/profile/change-request','UserController@chageRequest')->name('user.profile.change_request');
-		Route::get('/profile/change-company/{id}','UserController@changeCompany')->name('user.change_company');
-		Route::get('/log','UserController@log')->name('user.log');
-		Route::get('/login/to_site','UserController@loginToSite')->name('auth.login_to_site');
+		// Route::get('/profile','UserController@profile')->name('user.profile');
+		// Route::post('/profile/data','UserController@updateData')->name('user.profile.update_data');
+		// Route::post('/profile/password','UserController@updatePassword')->name('user.profile.update_password');
+		// Route::post('/profile/change-request','UserController@chageRequest')->name('user.profile.change_request');
+		// Route::get('/profile/change-company/{id}','UserController@changeCompany')->name('user.change_company');
+		// Route::get('/log','UserController@log')->name('user.log');
+		// Route::get('/login/to_site','UserController@loginToSite')->name('auth.login_to_site');
 
 		Route::get('company','CompanyController@index')->name('company');
 		Route::post('/company/data','CompanyController@updateData')->name('company.update_data');
