@@ -21,8 +21,9 @@ class StorageFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+      return [
+        'created_at' => now(),
+        'updated_at' => now(),
+      ];
     }
 }

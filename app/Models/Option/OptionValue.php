@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Models\Category;
+namespace App\Models\Option;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryName extends Model
+class OptionValue extends Model
 {
     use HasFactory;
-
 }

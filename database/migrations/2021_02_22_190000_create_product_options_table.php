@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductOptionNamesTable extends Migration
+class CreateProductOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateProductOptionNamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_option_names', function (Blueprint $table) {
+        Schema::create('product_options', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_option_id');
-            $table->enum('language', ['en','ru']);
-            $table->text('name');
-            $table->foreign('product_option_id')->references('id')->on('product_options');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedBigInteger('option_value');
+            $table->foreign('option_value')->references('id')->on('option_values');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateProductOptionNamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_option_names');
+        Schema::dropIfExists('product_options');
     }
 }

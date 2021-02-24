@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->text('public_number');
             $table->foreign('shipping_id')->references('id')->on('shippings');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->decimal('to_pay',10,2)->default(0);
             $table->enum('status', ['formed','awaits','payed']);
             $table->timestamps();
         });

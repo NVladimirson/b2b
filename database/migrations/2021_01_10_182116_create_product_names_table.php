@@ -16,7 +16,7 @@ class CreateProductNamesTable extends Migration
         Schema::create('product_names', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
-            $table->enum('language', ['en','ru']);
+            $table->enum('language', ['en','ru','uk']);
             $table->text('name');
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();

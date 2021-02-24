@@ -15,16 +15,16 @@ class CategorySeeder extends Seeder
     {
       \App\Models\Category\Category::factory(200)->create();
       \Cache::pull('counter');
-      for ($i=1; $i <= 200; $i++) {
-        $category =  \App\Models\Category\Category::find($i);
-
-        if(rand(0,1)){
-          $category->parent = $i;
-        }else{
-          $category->parent = rand(1,200);
-        }
-
-        $category->save();
-      }
+      // for ($i=1; $i <= 200; $i++) {
+      //   $category =  \App\Models\Category\Category::find($i);
+      //
+      //   if(rand(0,1)){
+      //     $category->parent = $i;
+      //   }else{
+      //     $category->parent = rand(1,200);
+      //   }
+      //
+      //   $category->save();
+      // }
     }
 }

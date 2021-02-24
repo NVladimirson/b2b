@@ -22,43 +22,24 @@ class CategoryFactory extends Factory
     public function definition()
     {
 
-      // if( (\Cache::get('counter') == null) ){
-      //   $counter = [];
-      //   for ($i=1; $i <= 200; $i++) {
-      //     $counter[] = $i;
-      //   }
-      //   \Cache::set('counter',$counter);
-      // }
-      // $parent_categories = \Cache::get('counter');
-      //     if(rand(0,9)){
-      //       return [
-      //         'priority' => 1,
-      //         'parent' => function() use ($parent_categories){
-      //             $key = array_rand($parent_categories);
-      //             $value = $parent_categories[$key];
-      //             if(count($parent_categories)>1){
-      //               unset($parent_categories[$key]);
-      //             }
-      //             \Cache::set('counter',$parent_categories);
-      //             return strval($value);
-      //         },
-      //         'created_at' => now(),
-      //         'updated_at' => now(),
-      //       ];
-      //     }
-      //     else{
-      //       return [
-      //         'priority' => 1,
-      //         'parent' => 0,
-      //         'created_at' => now(),
-      //         'updated_at' => now(),
-      //       ];
-      //     }
+      // return [
+      //   'priority' => 1,
+      //    'parent' => 1,
+      //   'created_at' => now(),
+      //   'updated_at' => now(),
+      // ];
+      if( (\Cache::get('counter') == null) ){
+        \Cache::set('counter',1);
+      }
+      $current_category_id = \Cache::get('counter');
+
+      \Cache::set('counter',$current_category_id+1);
+
       return [
+        'parent' => rand(0,3) ? rand(1,$current_category_id) : $current_category_id,
         'priority' => 1,
-         'parent' => 1,
         'created_at' => now(),
-        'updated_at' => now(),
+        'updated_at' => now()
       ];
 
     }

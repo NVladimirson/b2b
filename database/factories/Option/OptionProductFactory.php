@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Factories\Product;
+namespace Database\Factories\Option;
 
 use App\Models\Product\ProductOption;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductOptionFactory extends Factory
+class OptionProduct extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -21,8 +21,15 @@ class ProductOptionFactory extends Factory
      */
     public function definition()
     {
+        if( (\Cache::get('counter') == null) ){
+          \Cache::set('counter',1);
+        }
+        $product_id = ceil($i/5);
+        $current_i = $i;
+        \Cache::set('counter',$i+1);
         return [
-          'product_id' => rand(1,1000),
+          'product_id' => $product_id,
+           // 'parent'
           'created_at' => now(),
           'updated_at' => now(),
         ];

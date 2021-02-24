@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryNamesTable extends Migration
+class CreateStoragesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateCategoryNamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_names', function (Blueprint $table) {
+        Schema::create('storages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('category_id');
-            $table->enum('language', ['en','ru','uk']);
-            $table->text('name');
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateCategoryNamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_names');
+        Schema::dropIfExists('storages');
     }
 }

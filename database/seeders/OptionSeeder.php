@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class ProductOptionNameSeeder extends Seeder
+class OptionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class ProductOptionNameSeeder extends Seeder
      */
     public function run()
     {
-      \App\Models\Product\ProductOptionName::factory(10000)->create();
-      \Cache::pull('counter');
+      \App\Models\Option\Option::factory(1000)->create();
+       \Cache::pull('counter');
     }
 }

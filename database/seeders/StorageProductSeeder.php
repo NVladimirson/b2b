@@ -13,6 +13,12 @@ class StorageProductSeeder extends Seeder
      */
     public function run()
     {
-        //
+        for ($i=9.99; $i <= 999.99; $i = $i + 10) {
+          $prices[] = $i;
+        }
+        \Cache::set('prices',$prices);
+        \App\Models\Storage\StorageProduct::factory(5000)->create();
+        \Cache::pull('counter');
+
     }
 }

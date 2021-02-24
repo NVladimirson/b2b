@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories\Category;
+namespace Database\Factories\Option;
 
-use App\Models\Category\CategoryName;
+use App\Models\Option\OptionName;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CategoryNameFactory extends Factory
+class OptionNameFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = CategoryName::class;
+    protected $model = OptionName::class;
 
     /**
      * Define the model's default state.
@@ -21,27 +21,21 @@ class CategoryNameFactory extends Factory
      */
     public function definition()
     {
-      // return [
-      //   'category_id' => 1,
-      //   'language' => 'en',
-      //   'name' => ' ',
-      //   'created_at' => now(),
-      //   'updated_at' => now(),
-      // ];
+
       if( (\Cache::get('counter') == null) ){
         \Cache::set('counter',1);
       }
-      $current_category_name_id = \Cache::get('counter');
-      \Cache::set('counter',$current_category_name_id+1);
+      $current_option_name_id = \Cache::get('counter');
+      \Cache::set('counter',$current_option_name_id+1);
 
-      $parent = intval(ceil($current_category_name_id/3));
+      $parent = intval(ceil($current_option_name_id/3));
       $previous_parent = 0;
       $nested_names = [$parent];
       while ($parent != $previous_parent) {
         $res = \DB::select(
           '
           SELECT parent
-          FROM categories
+          FROM options
           WHERE id="'.$parent.'"
           '
       );
@@ -57,19 +51,19 @@ class CategoryNameFactory extends Factory
         }
       }
 
-      if($current_category_name_id % 3 == 1){
+      if($current_option_name_id % 3 == 1){
         $language = 'ru';
-        $name = 'Категория ';
+        $name = 'Опция ';
       }
-      else if($current_category_name_id % 3 == 2){
+      else if($current_option_name_id % 3 == 2){
         $language = 'uk';
-        $name = 'Категорія ';
+        $name = 'Опція ';
       }
       else{
         $language = 'en';
-        $name = 'Category ';
+        $name = 'Option ';
       }
-
+      
       $first = true;
 
       foreach (array_reverse($nested_names) as $key => $name_no) {
@@ -82,11 +76,12 @@ class CategoryNameFactory extends Factory
       }
 
       return [
-        'category_id' => ceil($current_category_name_id/3),
+        'option_id' => ceil($current_option_name_id/3),
         'name' => $name,
         'language' => $language,
         'created_at' => now(),
         'updated_at' => now()
       ];
+
     }
 }

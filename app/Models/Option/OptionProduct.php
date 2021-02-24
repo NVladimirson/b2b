@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Models\Product;
+namespace App\Models\Option;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductOptionName extends Model
+class OptionProduct extends Model
 {
     use HasFactory;
+
+    protected $table = 'product_options';
 }

@@ -2,17 +2,17 @@
 
 namespace Database\Factories\Storage;
 
-use App\Models\Storage\StorageProduct;
+use App\Models\Storage\StorageName;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class StorageProductFactory extends Factory
+class StorageNameFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = StorageProduct::class;
+    protected $model = StorageName::class;
 
     /**
      * Define the model's default state.
@@ -21,18 +21,29 @@ class StorageProductFactory extends Factory
      */
     public function definition()
     {
+
         if( (\Cache::get('counter') == null) ){
           \Cache::set('counter',1);
         }
         $i = \Cache::get('counter');
-        $storage_id = ceil($i/10);
+        $storage_id = ceil($i/3);
+        if($i%3 == 1){
+          \Cache::set('code',$this->faker->unique()->ean8);
+          $code = \Cache::get('code');
+          $language = 'en';
+        }
+        else if ($i%3 == 2){
+          $language = 'ru';
+        }
+        else{
+          $language = 'uk';
+        }
+          $name = 'Склад '.\Cache::get('code');
         \Cache::set('counter',$i+1);
-        $prices = \Cache::get('prices');
         return [
-          'product_id' => rand(1,1000),
           'storage_id' => $storage_id,
-          'amount' => rand(0,3) ? rand(1,999) : 0,
-          'price' => $prices[array_rand($prices)],
+          'language' => $language,
+          'name' => $name,
           'created_at' => now(),
           'updated_at' => now()
         ];
