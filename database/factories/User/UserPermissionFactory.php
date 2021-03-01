@@ -4,6 +4,7 @@ namespace Database\Factories\User;
 
 use App\Models\User\UserPermission;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Cache;
 
 class UserPermissionFactory extends Factory
 {
@@ -21,14 +22,14 @@ class UserPermissionFactory extends Factory
      */
     public function definition()
     {
-        if( (\Cache::get('counter') == null) ){
+        if( (Cache::get('counter') == null) ){
           $counter = [];
           for ($i=1; $i <= 10; $i++) {
             $counter[] = $i;
           }
-          \Cache::set('counter',$counter);
+          Cache::set('counter',$counter);
         }
-        $users = \Cache::get('counter');
+        $users = Cache::get('counter');
         return [
             //'user_id' => $this->faker->unique(true)->numberBetween(1,10),
             'user_id' => function() use ($users){
@@ -37,10 +38,10 @@ class UserPermissionFactory extends Factory
                 if(count($users)>1){
                   unset($users[$key]);
                 }
-                \Cache::set('counter',$users);
+                Cache::set('counter',$users);
                 return strval($value);
             },
-            'admin' => $this->faker->boolean($chanceOfGettingTrue = 20),
+            'admin' => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ];

@@ -30,12 +30,12 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
+            aria-expanded="true" aria-controls="collapseProducts">
             <i class="fas fa-fw fa-folder"></i>
             <span>@lang('layout_sidebar_topbar.sidebar.products.name')</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseProducts" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.products.actions'):</h6>
                 <!-- <a class="collapse-item" href="buttons.html">Buttons</a>
@@ -47,12 +47,29 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStorages"
+            aria-expanded="true" aria-controls="collapseStorages">
+            <i class="fas fa-boxes"></i>
+            <span>@lang('layout_sidebar_topbar.sidebar.storages.name')</span>
+        </a>
+        <div id="collapseStorages" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.storages.actions'):</h6>
+                <a class="collapse-item" href="{{route('storages')}}">@lang('layout_sidebar_topbar.sidebar.storages.all')</a>
+            </div>
+        </div>
+    </li>
+
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders"
+            aria-expanded="true" aria-controls="collapseOrders">
             <i class="fas fa-shopping-cart"></i>
             <span>@lang('layout_sidebar_topbar.sidebar.orders.name')</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+        <div id="collapseOrders" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.orders.actions'):</h6>
@@ -60,7 +77,6 @@
             </div>
         </div>
     </li>
-
     <!-- Divider -->
     <!-- <hr class="sidebar-divider"> -->
 

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Option extends Model
 {
     use HasFactory;
+
+    public function names(){
+      return $this->hasMany('App\Models\Option\OptionName','option_id');
+    }
 }

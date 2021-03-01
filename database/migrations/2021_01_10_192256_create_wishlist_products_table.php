@@ -19,6 +19,7 @@ class CreateWishlistProductsTable extends Migration
             $table->unsignedBigInteger('wishlist_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('wishlist_id')->references('id')->on('wishlists');
+            //$table->text('comment');
             $table->timestamps();
         });
     }

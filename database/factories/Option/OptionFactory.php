@@ -22,17 +22,17 @@ class OptionFactory extends Factory
     public function definition()
     {
 
-      if( (\Cache::get('counter') == null) ){
-        \Cache::set('counter',1);
-      }
-      $current_option_id = \Cache::get('counter');
+      // if( (\Cache::get('counter') == null) ){
+      //   \Cache::set('counter',1);
+      // }
+      // $current_option_id = \Cache::get('counter');
 
-      \Cache::set('counter',$current_option_id+1);
+      // \Cache::set('counter',$current_option_id+1);
 
       return [
-        'parent' => ($current_option_id<=100) ? $current_option_id : rand(1,100),
-        'position' => 1,
-        'main' =>($current_option_id<=100) ? 1 : 0,
+        // 'parent' => ($current_option_id<=100) ? $current_option_id : rand(1,100),
+        // 'position' => 1,
+        // 'main' =>($current_option_id<=100) ? 1 : 0,
         'created_at' => now(),
         'updated_at' => now()
       ];

@@ -39,6 +39,8 @@ class DatabaseSeeder extends Seeder
              StorageSeeder::class,
              StorageProductSeeder::class,
 
+             ShippingModelSeeder::class,
+
           ]);
         }
 

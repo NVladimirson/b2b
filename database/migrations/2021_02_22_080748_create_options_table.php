@@ -15,10 +15,10 @@ class CreateOptionsTable extends Migration
     {
         Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent');
-            $table->foreign('parent')->references('id')->on('options');
-            $table->unsignedSmallInteger('position')->default('1');
-            $table->unsignedSmallInteger('main')->default('0');
+            // $table->unsignedBigInteger('parent');
+            // $table->foreign('parent')->references('id')->on('options');
+            // $table->unsignedSmallInteger('position')->default('1');
+            // $table->unsignedSmallInteger('main')->default('0');
             $table->timestamps();
         });
     }

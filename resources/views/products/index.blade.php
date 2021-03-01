@@ -34,20 +34,20 @@
                 <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
                   <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Article</th>
-                        <th>Description</th>
-                        <th>Category</th>
-                        <th>Storages</th>
+                        <th>@lang('product.index.table_header.name')</th>
+                        <th>@lang('product.index.table_header.article')</th>
+                        <th>@lang('product.index.table_header.description')</th>
+                        <th>@lang('product.index.table_header.categories')</th>
+                        <th>@lang('product.index.table_header.storages')</th>
                       </tr>
                   </thead>
                   <tfoot>
                       <tr>
-                          <th>Name</th>
-                          <th>Article</th>
-                          <th>Description</th>
-                          <th>Category</th>
-                          <th>Storages</th>
+                          <th>@lang('product.index.table_header.name')</th>
+                          <th>@lang('product.index.table_header.article')</th>
+                          <th>@lang('product.index.table_header.description')</th>
+                          <th>@lang('product.index.table_header.categories')</th>
+                          <th>@lang('product.index.table_header.storages')</th>
                       </tr>
                   </tfoot>
                   <tbody>
@@ -70,6 +70,60 @@
 </div>
 
 </div>
+
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebarRight">
+
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading" style="text-align: center; font-size: 14px">
+      Categories
+  </div>
+
+
+    <div class="bg-white py-2 collapse-inner rounded" style="height : 20%;overflow : scroll">
+      <div id="category_data_div"></div>
+    </div>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <!-- <div class="sidebar-heading" style="text-align: center; font-size: 14px">
+        Options
+    </div>
+
+    <div class="bg-white py-2 collapse-inner rounded" style="height : 20%;overflow : scroll">
+      <div id="option_data_div"></div>
+    </div> -->
+
+  {{--
+    @if(isset($categories_widget))
+  @foreach(\Cache::get('category_widget_info') as $key => $value)
+  <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse{{$key}}"
+          aria-expanded="true" aria-controls="collapse{{$key}}">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>{{$value['info'][$language]['name']}}</span>
+      </a>
+      <div id="collapse{{$key}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            @if(isset($value['childs']))
+              @foreach($value['childs'] as $childkey => $childs)
+                  <a class="collapse-item" href="#">{{$childs['info'][$language]['name']}}</a>
+              @endforeach
+            @endif
+          </div>
+      </div>
+  </li>
+  @endforeach
+  @endif
+--}}
+
+
+</ul>
 
 </div>
 
@@ -138,5 +192,26 @@
                       },
                   ],
               });
+
+
+            $('#category_data_div').jstree({ 'core' : {
+                'data' : [
+                   // { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+                   // { "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+                   // { "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+                   // { "id" : "ajson4", "parent" : "ajson3", "text" : "Child 2" },
+                   {!! $category_data !!}
+                ]
+            } });
+
+            // $('#option_data_div').jstree({ 'core' : {
+            //     'data' : [
+            //        // { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+            //        // { "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+            //        // { "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+            //        // { "id" : "ajson4", "parent" : "ajson3", "text" : "Child 2" },
+            //        {!! $option_data !!}
+            //     ]
+            // } });
 } );
 </script>

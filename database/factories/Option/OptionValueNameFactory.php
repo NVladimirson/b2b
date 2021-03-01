@@ -4,6 +4,7 @@ namespace Database\Factories\Option;
 
 use App\Models\Option\OptionValueName;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Cache;
 
 class OptionValueNameFactory extends Factory
 {
@@ -21,12 +22,12 @@ class OptionValueNameFactory extends Factory
      */
     public function definition()
     {
-      if( (\Cache::get('counter') == null) ){
-        \Cache::set('counter',1);
+      if( (Cache::get('counter') == null) ){
+        Cache::set('counter',1);
       }
-      $current_value_name_id = \Cache::get('counter');
+      $current_value_name_id = Cache::get('counter');
       $current_value_id = intval(ceil($current_value_name_id/3));
-      \Cache::set('counter',$current_value_name_id+1);
+      Cache::set('counter',$current_value_name_id+1);
 
       if($current_value_name_id % 3 == 1){
         $language = 'ru';

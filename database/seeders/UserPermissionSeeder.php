@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User\UserPermission;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class UserPermissionSeeder extends Seeder
 {
@@ -14,6 +16,12 @@ class UserPermissionSeeder extends Seeder
     public function run()
     {
       \App\Models\User\UserPermission::factory(10)->create();
-       \Cache::pull('counter');
+       Cache::pull('counter');
+       UserPermission::create([
+         'user_id' => 11,
+         'admin' => 1,
+         'created_at' => now(),
+         'updated_at' => now()
+       ])->save();
     }
 }

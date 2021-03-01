@@ -17,13 +17,18 @@ return [
       'home' => 'Home',
       'products' => [
         'name' => 'Products',
-        'actions' => 'Products Actions',
+        'actions' => 'Product Actions',
         'all' => 'All Products'
       ],
       'orders' => [
         'name' => 'Orders',
-        'actions' => 'Orders Categories',
+        'actions' => 'Order Actions',
         'all' => 'All Orders'
+      ],
+      'storages' => [
+        'name' => 'Storages',
+        'actions' => 'Storage Actions',
+        'all' => 'All Storages'
       ],
     ],
     'search' => [

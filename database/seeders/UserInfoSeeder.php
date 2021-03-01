@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class UserInfoSeeder extends Seeder
 {
@@ -13,7 +14,8 @@ class UserInfoSeeder extends Seeder
      */
     public function run()
     {
-      \App\Models\User\UserInfo::factory(10)->create();
-      \Cache::pull('counter');
+      Cache::set('counter', NULL);
+      \App\Models\User\UserInfo::factory(100)->create();
+      Cache::pull('counter');
     }
 }

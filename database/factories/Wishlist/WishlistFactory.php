@@ -22,7 +22,10 @@ class WishlistFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => rand(0,9) ? 11 : rand(1,10),
+            'name' => $this->faker->realText(10,1),
+            'created_at' => now(),
+            'updated_at' => now()
         ];
     }
 }

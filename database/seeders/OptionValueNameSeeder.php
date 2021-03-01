@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class OptionValueNameSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class OptionValueNameSeeder extends Seeder
     public function run()
     {
       \App\Models\Option\OptionValueName::factory(8100)->create();
-       \Cache::pull('counter');
-       \Cache::pull('code');
+       Cache::pull('counter');
+       Cache::pull('code');
     }
 }

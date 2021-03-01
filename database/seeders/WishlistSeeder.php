@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class WishlistSeeder extends Seeder
 {
@@ -13,6 +14,7 @@ class WishlistSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Wishlist\Wishlist::factory(100)->create();
+        Cache::pull('counter');
     }
 }

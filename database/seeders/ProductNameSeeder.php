@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class ProductNameSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class ProductNameSeeder extends Seeder
     public function run()
     {
       \App\Models\Product\ProductName::factory(3000)->create();
-       \Cache::pull('counter');
-       \Cache::pull('code');
+       Cache::pull('counter');
+       Cache::pull('code');
     }
 }
