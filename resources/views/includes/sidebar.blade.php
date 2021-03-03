@@ -72,8 +72,10 @@
         <div id="collapseOrders" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.orders.actions'):</h6>
-                <a class="collapse-item" href="{{route('orders')}}">@lang('layout_sidebar_topbar.sidebar.orders.all')</a>
+            <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.orders.actions'):</h6>
+            <a class="collapse-item" href="{{route('orders')}}">@lang('layout_sidebar_topbar.sidebar.orders.all')</a>
+            <a class="collapse-item" href="{{route('orders')}}">@lang('layout_sidebar_topbar.sidebar.orders.cart')</a>
+            <a class="collapse-item" href="{{route('orders')}}">@lang('layout_sidebar_topbar.sidebar.orders.wishlist')</a>
             </div>
         </div>
     </li>

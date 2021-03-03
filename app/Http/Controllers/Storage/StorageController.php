@@ -10,6 +10,7 @@ class StorageController extends Controller
 {
     public function index(Request $request){
         $storages = Storage::first();
+        dd($storages);
         return view('storages.index');
     }
 

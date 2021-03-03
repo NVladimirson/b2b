@@ -31,25 +31,51 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Product Information</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">@lang('product.show.product_information.title')</h6>
 
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
 
                                 <div class="row mb-3">
-                                <div class="col-4 themed-grid-col">ID</div>
+                                <div class="col-4 themed-grid-col">@lang('product.show.product_information.id')</div>
                                 <div class="col-8 themed-grid-col">{{$product->id}}</div>
                                 </div>
 
                                 <div class="row mb-3">
-                                <div class="col-4 themed-grid-col">Article</div>
+                                <div class="col-4 themed-grid-col">@lang('product.show.product_information.article')</div>
                                 <div class="col-8 themed-grid-col">{{$product->article}}</div>
                                 </div>
+
                                 </div>
                             </div>
                         </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-11">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between ">
+                                    <h6 class="m-0 font-weight-bold text-primary">@lang('product.show.product_options.title')</h6>
+
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                @forelse($product_options as $product_option)
+                                <div class="row mb-3">
+                                <div class="col-6 themed-grid-col">{{$product_option['option']}}</div>
+                                <div class="col-6 themed-grid-col">{{$product_option['value']}}</div>
+                                </div>
+                                @empty
+                                @endforelse
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+
 
                         <div class="row">
                             <div class="col-xl-12 col-lg-12">
@@ -57,7 +83,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Product Storages</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">@lang('product.show.product_storages.title')</h6>
 
                                 </div>
                                 <!-- Card Body -->
@@ -74,7 +100,7 @@
                                 </div>
                                 <div class="col-8 themed-grid-col">
                                     {{--$storage_product['amount']--}}
-                                    <h4 class="small font-weight-bold">Product Amount<span
+                                    <h4 class="small font-weight-bold">@lang('product.show.product_storages.amount')<span
                                             class="float-right">
                                         @php $percent = floor($storage_product['amount'] / 1000 * 100) @endphp
                                             @if($percent < 1)
@@ -128,11 +154,11 @@
                                 <div class="col-2 themed-grid-col">
                                     <div class="row">
                                     <div class="col-6 themed-grid-col text-center">
-                                    <h4 class="small font-weight-bold">Add To Cart</h4>
+                                    <h4 class="small font-weight-bold">@lang('product.show.product_storages.add_to_cart')</h4>
                                     <i class="fas fa-plus"></i>
                                     </div>
                                     <div class="col-6 themed-grid-col text-center">
-                                    <h4 class="small font-weight-bold">Add To Wishes</h4>
+                                    <h4 class="small font-weight-bold">@lang('product.show.product_storages.add_to_wishlist')</h4>
                                     <i class="fas fa-plus"></i>
                                     </div>
                                     </div>

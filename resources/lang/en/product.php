@@ -21,6 +21,23 @@ return [
             'categories' => 'Category',
             'storages' => 'Storages',
         ]
-    ]
+    ],
+    'show' => [
+            'product' => 'Product',
+            'product_information' => [
+                'title' => 'Product Info',
+                'id' => 'ID',
+                'article' => 'Article'
+            ],
+            'product_options' => [
+                'title' => 'Product Options'
+            ],
+            'product_storages' => [
+                'title' => 'Product Storages',
+                'amount' => 'Amount',
+                'add_to_cart' => 'Add To Cart',
+                'add_to_wishlist' => 'Add To Wishlist',
+            ]
+        ]
 
 ];

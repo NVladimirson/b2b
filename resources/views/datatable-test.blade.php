@@ -31,35 +31,26 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
-                  <thead>
-                      <tr>
-                        <th>@lang('product.index.table_header.storages')</th>
-                        <th>@lang('product.index.table_header.name')</th>
-                        <th>@lang('product.index.table_header.article')</th>
-                        <th>@lang('product.index.table_header.description')</th>
-                        <th>@lang('product.index.table_header.categories')</th>
-                      </tr>
-                  </thead>
-                  <tfoot>
-                      <tr>
-                        <th>@lang('product.index.table_header.storages')</th>
-                          <th>@lang('product.index.table_header.name')</th>
-                          <th>@lang('product.index.table_header.article')</th>
-                          <th>@lang('product.index.table_header.description')</th>
-                          <th>@lang('product.index.table_header.categories')</th>
-                      </tr>
-                  </tfoot>
-                  <tbody>
-                      <!-- <tr>
-                          <td>Tiger Nixon</td>
-                          <td>System Architect</td>
-                          <td>Edinburgh</td>
-                          <td>61</td>
-                          <td>2011/04/25</td>
-                      </tr> -->
-                  </tbody>
-                </table>
+            <table id="example" class="table table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
             </div>
         </div>
     </div>
@@ -152,67 +143,41 @@
 
   <script>
 
-      jQuery(function($) {
-        //   window.table =
-        //       $('#datatable').DataTable({
-        //            scrollY: "100vh",
-        //           deferRender: true,
-        //           // "language": {
-        //           //     "url": "@lang('table.localization_link')",
-        //           // },
-        //            "scrollX": true,
-        //           "pageLength": 25,
-        //           "autoWidth": true,
-        //           "processing": true,
-        //           "serverSide": true,
-        //           "ajax": {
-        //               "url": "{!! route('products.datatable') !!}",
-        //               "data": {
-
-        //               }
-        //           },
-        //           "order": [
-        //               [1, "asc"]
-        //           ],
-        //           "columns": [
-        //               {
-        //                  data: 'name',
-        //               },
-        //               {
-        //                   data: 'article',
-        //               },
-        //               {
-        //                   data: 'description',
-        //               },
-        //               {
-        //                   data: 'category',
-        //               },
-        //               {
-        //                   data: 'storages',
-        //               },
-        //           ],
-        //       });
-
-
-        function details ( d ) {
-            return d.storages;
-        }
-
-
-        var table = $('#datatable').DataTable( {
-        "ajax": "{!! route('products.datatable') !!}",
-        //'processing': true,
-        'language': {
-            "url": "{{route('dtlocalization')}}",
-        },
-
-        // 'language': {
-        //     'loadingRecords': '&nbsp;',
-        //     'processing': "<div class=\"text-center\"><span class='fa-stack fa-lg'>\n\
-        //                     <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
-        //                </span>&emsp;</div>",
-        // },
-
+/* Formatting function for row details - modify as you need */
+function details ( d ) {
+    // `d` is the original data object for the row
+    // return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+    //     '<tr>'+
+    //         '<td>Full name:</td>'+
+    //         '<td>'+d.name+'</td>'+
+    //     '</tr>'+
+    //     '<tr>'+
+    //         '<td>Extension number:</td>'+
+    //         '<td>'+d.extn+'</td>'+
+    //     '</tr>'+
+    //     '<tr>'+
+    //         '<td>Extra info:</td>'+
+    //         '<td>And any further details here (images etc)...</td>'+
+    //     '</tr>'+
+    // '</table>';
+    return d.storages;
+}
+ 
+jQuery(function($) {
+    var table = $('#example').DataTable( {
+        "ajax": "{!! route('test_ajax') !!}",
+        // "columns": [
+        //     {
+        //         "className":      'details-control',
+        //         "orderable":      false,
+        //         "data":           null,
+        //         "defaultContent": '<div class="text-center"><i class="fa fa-plus"></i></div>'
+        //     },
+        //     { "data": "name" },
+        //     { "data": "position" },
+        //     { "data": "office" },
+        //     { "data": "salary" }
+        // ],
         "columns": [
             {
                 "className":      'details-control',
@@ -223,13 +188,13 @@
             { "data": "name" },
             { "data": "article" },
             { "data": "description" },
-            { "data": "category" },
+            { "data": "category" }
         ],
-        "order": [[1, 'asc']], 
+        "order": [[1, 'asc']]
     } );
      
     // Add event listener for opening and closing details
-    $('#datatable tbody').on('click', 'td.details-control', function () {
+    $('#example tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
  
@@ -244,26 +209,6 @@
             tr.addClass('shown');
         }
     } );
-
-
-            $('#category_data_div').jstree({ 'core' : {
-                'data' : [
-                   // { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
-                   // { "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
-                   // { "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
-                   // { "id" : "ajson4", "parent" : "ajson3", "text" : "Child 2" },
-                   {!! $category_data !!}
-                ]
-            } });
-
-            // $('#option_data_div').jstree({ 'core' : {
-            //     'data' : [
-            //        // { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
-            //        // { "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
-            //        // { "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
-            //        // { "id" : "ajson4", "parent" : "ajson3", "text" : "Child 2" },
-            //        {!! $option_data !!}
-            //     ]
-            // } });
 } );
+
 </script>

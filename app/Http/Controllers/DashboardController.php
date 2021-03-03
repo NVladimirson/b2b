@@ -33,5 +33,9 @@ class DashboardController extends Controller
       );
     }
 
+    public function dtlocalization(){
+      return (json_encode(__('miscellaneous.datatable.localization_link')));
+    }
+
 
 }

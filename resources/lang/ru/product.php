@@ -21,6 +21,23 @@ return [
             'categories' => 'Категория',
             'storages' => 'Склады',
         ]
+        ],
+    'show' => [
+        'product' => 'Продукт',
+        'product_information' => [
+            'title' => 'Информация о продукте',
+            'id' => 'Идентификатор',
+            'article' => 'Артикул'
+        ],
+        'product_options' => [
+            'title' => 'Опции Продукта'
+        ],
+        'product_storages' => [
+            'title' => 'Склады продукта',
+            'amount' => 'Количество на складе',
+            'add_to_cart' => 'Добавить в Корзину',
+            'add_to_wishlist' => 'Добавить в Список Желаний',
+        ]
     ]
 
 ];

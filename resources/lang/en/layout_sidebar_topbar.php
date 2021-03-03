@@ -23,7 +23,9 @@ return [
       'orders' => [
         'name' => 'Orders',
         'actions' => 'Order Actions',
-        'all' => 'All Orders'
+        'all' => 'History of Orders',
+        'cart' => 'My Cart',
+        'wishlist' => 'Wishlist'
       ],
       'storages' => [
         'name' => 'Storages',
