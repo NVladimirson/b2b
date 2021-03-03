@@ -2,6 +2,8 @@
 
 namespace App\Models\Product;
 
+use App\Models\Option\Option;
+use App\Models\Option\OptionProduct;
 use App\Models\Storage\Storage;
 use App\Models\Storage\StorageProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,7 +33,10 @@ class Product extends Model
 
     public function storages(){
       return $this->belongsToMany(Storage::class, 'storage_products');
+    }
 
+    public function options(){
+      return $this->hasMany('App\Models\Option\OptionProduct','product_id');
     }
     // public function storages(){
     //   // return $this->hasManyThrough('App\Models\Storage\Storage','category_id','category_id');

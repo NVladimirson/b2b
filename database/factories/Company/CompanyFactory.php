@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories\Order;
+namespace Database\Factories\Company;
 
-use App\Models\Order\OrderItem;
+use App\Models\Company\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class OrderItemFactory extends Factory
+class CompanyFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = OrderItem::class;
+    protected $model = Company::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,7 @@ class OrderItemFactory extends Factory
     public function definition()
     {
         return [
-            'order_id' => rand(1,100),
-            'product_id' => rand(1,1000),
-            'quantity' => rand(1,100),
+            'name' => $this->faker->company,
             'created_at' => now(),
             'updated_at' => now()
         ];

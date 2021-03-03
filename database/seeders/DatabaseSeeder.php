@@ -19,16 +19,25 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User\UserPermission::factory(10)->create();
         {
           $this->call([
+              RoleSeeder::class,
+              RolePermissionSeeder::class,
+
+              CompanySeeder::class,
+               StorageSeeder::class,
+               CompanyStorageSeeder::class,
 
              UserSeeder::class,
              UserInfoSeeder::class,
-             UserPermissionSeeder::class,
-            //
+             UserRoleSeeder::class,
+             CompanyUserSeeder::class,
+            // //
             CategorySeeder::class,
             CategoryNameSeeder::class,
+
+              ProductSeeder::class,
+              ProductNameSeeder::class,
+              StorageProductSeeder::class,
             //
-             ProductSeeder::class,
-             ProductNameSeeder::class,
 
              OptionSeeder::class,
              OptionNameSeeder::class,
@@ -36,10 +45,12 @@ class DatabaseSeeder extends Seeder
              OptionValueNameSeeder::class,
              OptionProductSeeder::class,
 
-             StorageSeeder::class,
-             StorageProductSeeder::class,
-
              ShippingModelSeeder::class,
+
+             OrderSeeder::class,
+             OrderItemSeeder::class,
+            
+
 
           ]);
         }

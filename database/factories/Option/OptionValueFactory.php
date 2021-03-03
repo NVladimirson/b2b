@@ -30,12 +30,12 @@ class OptionValueFactory extends Factory
         Cache::set('counter',1);
       }
       $current_value_id = Cache::get('counter');
-      $current_option_id = intval(ceil($current_value_id/3));
+      //$current_option_id = intval(ceil($current_value_id/3));
       Cache::set('counter',$current_value_id+1);
 
       return [
         //'option_id' => $current_option_id + 100,
-        'option_id' => $current_option_id,
+        'option_id' => $current_value_id,
         'created_at' => now(),
         'updated_at' => now()
       ];

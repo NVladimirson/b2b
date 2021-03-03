@@ -2,18 +2,18 @@
 
 namespace Database\Factories\User;
 
-use App\Models\User\UserPermission;
+use App\Models\User\UserRole;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Cache;
 
-class UserPermissionFactory extends Factory
+class UserRoleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = UserPermission::class;
+    protected $model = UserRole::class;
 
     /**
      * Define the model's default state.
@@ -32,16 +32,16 @@ class UserPermissionFactory extends Factory
         $users = Cache::get('counter');
         return [
             //'user_id' => $this->faker->unique(true)->numberBetween(1,10),
-            'user_id' => function() use ($users){
-                $key = array_rand($users);
-                $value = $users[$key];
-                if(count($users)>1){
-                  unset($users[$key]);
-                }
-                Cache::set('counter',$users);
-                return strval($value);
-            },
-            'admin' => 0,
+            // 'user_id' => function() use ($users){
+            //     $key = array_rand($users);
+            //     $value = $users[$key];
+            //     if(count($users)>1){
+            //       unset($users[$key]);
+            //     }
+            //     Cache::set('counter',$users);
+            //     return strval($value);
+            // },
+            // 'admin' => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ];

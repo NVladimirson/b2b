@@ -14,7 +14,7 @@ class OptionValueNameSeeder extends Seeder
      */
     public function run()
     {
-      \App\Models\Option\OptionValueName::factory(8100)->create();
+      \App\Models\Option\OptionValueName::factory(3000)->create();
        Cache::pull('counter');
        Cache::pull('code');
     }

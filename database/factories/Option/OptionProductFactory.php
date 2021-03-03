@@ -4,6 +4,7 @@ namespace Database\Factories\Option;
 
 use App\Models\Product\ProductOption;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Cache;
 
 class OptionProduct extends Factory
 {
@@ -21,12 +22,13 @@ class OptionProduct extends Factory
      */
     public function definition()
     {
-        if( (\Cache::get('counter') == null) ){
-          \Cache::set('counter',1);
+        if( (Cache::get('counter') == null) ){
+          Cache::set('counter',1);
         }
+        $i = Cache::get('counter') ;
         $product_id = ceil($i/5);
         $current_i = $i;
-        \Cache::set('counter',$i+1);
+        Cache::set('counter',$i+1);
         return [
           'product_id' => $product_id,
            // 'parent'

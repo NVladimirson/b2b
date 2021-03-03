@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Order\Order;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Cache;
+use App\Models\Company\Company;
 
-class OrderSeeder extends Seeder
+class CompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +14,6 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        Order::factory(100)->create();
-        Cache::pull('counter');
+        Company::factory(100)->create();
     }
 }

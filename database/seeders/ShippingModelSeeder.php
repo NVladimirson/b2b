@@ -19,20 +19,20 @@ class ShippingModelSeeder extends Seeder
             'info' => json_encode(['name' => ['uk' => 'Самовивіз', 'en' => 'Pickup', 'ru' => 'Самовывоз']]),
             'created_at' => now(),
             'updated_at' => now()
-        ]);
+        ])->save();
 
         ShippingModel::create([
             'id' => 2,
             'info' => json_encode(['name' => ['uk' => 'Нова Пошта', 'en' => 'Nova Poshta', 'ru' => 'Новая Почта']]),
             'created_at' => now(),
             'updated_at' => now()
-        ]);
+        ])->save();
 
         ShippingModel::create([
             'id' => 3,
             'info' => json_encode(['name' => ['uk' => 'Укр Пошта', 'en' => 'Ukr Poshta', 'ru' => 'Укр Пошта']]),
             'created_at' => now(),
             'updated_at' => now()
-        ]);
+        ])->save();
     }
 }

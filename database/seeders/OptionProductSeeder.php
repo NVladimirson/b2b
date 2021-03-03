@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class OptionProductSeeder extends Seeder
 {
@@ -14,12 +15,12 @@ class OptionProductSeeder extends Seeder
      */
     public function run()
     {
-      \Cache::pull('counter');
+      Cache::pull('counter');
       for ($product_id = 1; $product_id <= 1000; $product_id++) {
         for ($option_number = 1; $option_number <= rand(1,5); $option_number ++) {
           \App\Models\Option\OptionProduct::create([
             'product_id' => $product_id,
-            'option_value' => rand(1,2700),
+            'option_value' => rand(1,1000),
             'created_at' => now(),
             'updated_at' => now()
           ]);
