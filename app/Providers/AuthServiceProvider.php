@@ -24,7 +24,26 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        
+        Gate::define('able_to_order', function(){
+            return intval(auth()->user()->getRole->getRolePermission->order);
+        });
 
-        //
+        Gate::define('able_to_manage_orders', function(){
+            return intval(auth()->user()->getRole->getRolePermission->manage_orders);
+        });
+
+        Gate::define('able_to_manage_content_storages', function(){
+            return intval(auth()->user()->getRole->getRolePermission->content_storages);
+        });
+
+        Gate::define('admin', function(){
+            return intval(auth()->user()->getRole->getRolePermission->admin);
+        });
+
+        // Gate::define('ocreate-rder', function ($user, $order) {
+        //     return $user->id === $post->user_id;
+        // });
+
     }
 }

@@ -14,6 +14,7 @@ class DashboardController extends Controller
 {
   public function index()
   {
+
     SEOTools::setTitle(trans('dashboard.page_name'));
 
     return view('home'

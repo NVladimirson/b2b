@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Company\Company;
+use App\Services\Miscellaneous;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -42,10 +44,20 @@ class User extends Authenticatable
     ];
 
     public function getInfo(){
-      return $this->hasOne('App\User\UserInfo','id','user_id');
+      return $this->hasOne('App\Models\User\UserInfo','id','user_id');
     }
 
     public function getPermission(){
-      return $this->hasOne('App\User\UserPermission','id','user_id');
+      return $this->hasOne('App\Models\User\UserPermission','id','user_id');
+    }
+
+    public function getRole(){
+      return $this->hasOne('App\Models\User\UserRole','user_id');
+    }
+
+    public function getCompanyNameAttribute($value)
+    {
+        $language = Miscellaneous::getLang();
+        return Company::find($this->company_id)->name;
     }
 }

@@ -24,13 +24,15 @@ return [
         'name' => 'Заказы',
         'actions' => 'Категории Заказов',
         'all' => 'История Заказов',
+        'all_for_company' => 'Заказы :company',
         'cart' => 'Моя Корзина',
         'wishlist' => 'Избранное'
       ],
       'storages' => [
         'name' => 'Склады',
         'actions' => 'Действия со Складами',
-        'all' => 'Все Склады'
+        'all' => 'Все Склады',
+        'all_for_company' => 'Склады :company'
       ],
     ],
     'search' => [

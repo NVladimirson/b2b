@@ -6,6 +6,7 @@ use App\Models\Option\Option;
 use App\Models\Option\OptionProduct;
 use App\Models\Storage\Storage;
 use App\Models\Storage\StorageProduct;
+use App\Services\Miscellaneous;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,6 +38,12 @@ class Product extends Model
 
     public function options(){
       return $this->hasMany('App\Models\Option\OptionProduct','product_id');
+    }
+
+    public function getLocalizedNameAttribute($value)
+    {
+        $language = Miscellaneous::getLang();
+        return $this->names()->firstWhere('language',$language)->name;
     }
     // public function storages(){
     //   // return $this->hasManyThrough('App\Models\Storage\Storage','category_id','category_id');

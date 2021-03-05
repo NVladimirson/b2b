@@ -2,6 +2,7 @@
 
 namespace App\Models\Option;
 
+use App\Services\Miscellaneous;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,5 +16,11 @@ class OptionValue extends Model
 
     public function option(){
         return $this->hasOne('App\Models\Option\Option', 'id', 'option_id');
+    }
+
+    public function getLocalizedNameAttribute($value)
+    {
+        $language = Miscellaneous::getLang();
+        return $this->names()->firstWhere('language',$language)->name;
     }
 }

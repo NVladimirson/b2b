@@ -155,11 +155,19 @@
                                     <div class="row">
                                     <div class="col-6 themed-grid-col text-center">
                                     <h4 class="small font-weight-bold">@lang('product.show.product_storages.add_to_cart')</h4>
+                                    @can('able_to_order')
+                                    <a href='#'><i class="fas fa-plus"></i></a>
+                                    @else
                                     <i class="fas fa-plus"></i>
+                                    @endcan
                                     </div>
                                     <div class="col-6 themed-grid-col text-center">
                                     <h4 class="small font-weight-bold">@lang('product.show.product_storages.add_to_wishlist')</h4>
+                                    @can('able_to_order')
+                                    <a href='#'><i class="fas fa-plus"></i></a>
+                                    @else
                                     <i class="fas fa-plus"></i>
+                                    @endcan
                                     </div>
                                     </div>
                                 </div>

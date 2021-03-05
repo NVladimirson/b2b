@@ -69,7 +69,7 @@ class RolePermissionSeeder extends Seeder
 
         RolePermission::create([
             'id' => 5,
-            'role_id' => 4,
+            'role_id' => 5,
             'order' => 1,
             'manage_orders' => 1,
             'manage_content_storages' => 1,

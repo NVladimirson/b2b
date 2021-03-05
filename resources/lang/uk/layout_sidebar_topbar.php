@@ -24,13 +24,15 @@ return [
         'name' => 'Замовлення',
         'actions' => 'Дії із Замовленнями',
         'all' => 'Історія Замовлень',
+        'all_for_company' => 'Замовлення :company',
         'cart' => 'Мій Кошик',
         'wishlist' => 'Уподобання'
       ],
       'storages' => [
         'name' => 'Склади',
         'actions' => 'Дії зі Складами',
-        'all' => 'Усі Склади'
+        'all' => 'Усі Склади',
+        'all_for_company' => 'Склади :company'
       ],
     ],
     'search' => [

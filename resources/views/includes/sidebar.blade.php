@@ -45,6 +45,9 @@
         </div>
     </li>
 
+
+
+     @can('able_to_manage_orders')
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStorages"
@@ -56,10 +59,45 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.storages.actions'):</h6>
-                <a class="collapse-item" href="{{route('storages')}}">@lang('layout_sidebar_topbar.sidebar.storages.all')</a>
+                <a class="collapse-item" href="{{route('storages.all')}}">@lang('layout_sidebar_topbar.sidebar.storages.all_for_company', ['company' => auth()->user()->company_name])</a>
             </div>
         </div>
     </li>
+            @endcan
+            @can('able_to_manage_content_storages')
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStorages"
+            aria-expanded="true" aria-controls="collapseStorages">
+            <i class="fas fa-boxes"></i>
+            <span>@lang('layout_sidebar_topbar.sidebar.storages.name')</span>
+        </a>
+        <div id="collapseStorages" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.storages.actions'):</h6>
+                <a class="collapse-item" href="{{route('storages.all')}}">@lang('layout_sidebar_topbar.sidebar.storages.all_for_company', ['company' => auth()->user()->company_name])</a>
+            </div>
+        </div>
+    </li>
+            @endcan
+            @can('admin')
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStorages"
+            aria-expanded="true" aria-controls="collapseStorages">
+            <i class="fas fa-boxes"></i>
+            <span>@lang('layout_sidebar_topbar.sidebar.storages.name')</span>
+        </a>
+        <div id="collapseStorages" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.storages.actions'):</h6>
+                <a class="collapse-item" href="{{route('storages.all')}}">@lang('layout_sidebar_topbar.sidebar.storages.all_for_company', ['company' => auth()->user()->company_name])</a>
+            </div>
+        </div>
+    </li>
+            @endcan
 
 
     <!-- Nav Item - Utilities Collapse Menu -->
@@ -73,9 +111,23 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.orders.actions'):</h6>
-            <a class="collapse-item" href="{{route('orders')}}">@lang('layout_sidebar_topbar.sidebar.orders.all')</a>
-            <a class="collapse-item" href="{{route('orders')}}">@lang('layout_sidebar_topbar.sidebar.orders.cart')</a>
-            <a class="collapse-item" href="{{route('orders')}}">@lang('layout_sidebar_topbar.sidebar.orders.wishlist')</a>
+            @can('able_to_order')
+            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.all')</a>
+            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.cart')</a>
+            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.wishlist')</a>
+            @endcan
+            @can('able_to_manage_orders')
+            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.all_for_company', ['company' => auth()->user()->company_name])</a>
+            @endcan
+            @can('able_to_manage_content_storages')
+            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.all_for_company', ['company' => auth()->user()->company_name])</a>
+            @endcan
+            @can('admin')
+            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.all')</a>
+            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.cart')</a>
+            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.wishlist')</a>
+            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.all_for_company', ['company' => auth()->user()->company_name])</a>
+            @endcan
             </div>
         </div>
     </li>

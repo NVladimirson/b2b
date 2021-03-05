@@ -24,6 +24,61 @@
                             class="fas fa-download fa-sm text-white-50"></i>@lang('home.generate_report')</a>
                 </div>
 
+                                            <!-- Area Chart -->
+                                            <div class="row">
+                            <div class="col-xl-12 col-lg-11">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Primary Info</h6>
+
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+
+                                <div class="row mb-3">
+                                <div class="col-4 themed-grid-col">User Name</div>
+                                <div class="col-8 themed-grid-col">{{auth()->user()->name}}</div>
+                                </div>
+
+                                <div class="row mb-3">
+                                <div class="col-4 themed-grid-col">Role</div>
+                                <div class="col-8 themed-grid-col">{{$role}}</div>
+                                </div>
+
+                                <div class="row mb-3">
+                                <div class="col-4 themed-grid-col">Company</div>
+                                <div class="col-8 themed-grid-col">
+                                    <a href="{{ route('company.show', ['id' => $company->id]) }}">{{$company->name}}</a
+                                    ></div>
+                                </div>
+
+                                <div class="row mb-3">
+                                <div class="col-4 themed-grid-col">Right to Order</div>
+                                <div class="col-8 themed-grid-col">{{$permissions['order']}}</div>
+                                </div>
+
+                                <div class="row mb-3">
+                                <div class="col-4 themed-grid-col">Right to Manage Orders</div>
+                                <div class="col-8 themed-grid-col">{{$permissions['manage_orders']}}</div>
+                                </div>
+
+                                <div class="row mb-3">
+                                <div class="col-4 themed-grid-col">Right to Manage Content Storages</div>
+                                <div class="col-8 themed-grid-col">{{$permissions['manage_content_storages']}}</div>
+                                </div>
+
+                                <div class="row mb-3">
+                                <div class="col-4 themed-grid-col">Right to Administrate</div>
+                                <div class="col-8 themed-grid-col">{{$permissions['admin']}}</div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
             </div>
             <!-- /.container-fluid -->
 

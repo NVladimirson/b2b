@@ -24,13 +24,15 @@ return [
         'name' => 'Orders',
         'actions' => 'Order Actions',
         'all' => 'History of Orders',
+        'all_for_company' => 'Orders of :company',
         'cart' => 'My Cart',
         'wishlist' => 'Wishlist'
       ],
       'storages' => [
         'name' => 'Storages',
         'actions' => 'Storage Actions',
-        'all' => 'All Storages'
+        'all' => 'All Storages',
+        'all_for_company' => 'Storages :company'
       ],
     ],
     'search' => [

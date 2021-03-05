@@ -23,25 +23,16 @@ class UserRoleFactory extends Factory
     public function definition()
     {
         if( (Cache::get('counter') == null) ){
-          $counter = [];
-          for ($i=1; $i <= 10; $i++) {
-            $counter[] = $i;
-          }
-          Cache::set('counter',$counter);
+          Cache::set('counter',1);
         }
-        $users = Cache::get('counter');
+
+        $user_id = Cache::get('counter');
+        Cache::set('counter',$user_id + 1);
+        
+
         return [
-            //'user_id' => $this->faker->unique(true)->numberBetween(1,10),
-            // 'user_id' => function() use ($users){
-            //     $key = array_rand($users);
-            //     $value = $users[$key];
-            //     if(count($users)>1){
-            //       unset($users[$key]);
-            //     }
-            //     Cache::set('counter',$users);
-            //     return strval($value);
-            // },
-            // 'admin' => 0,
+            'user_id' => $user_id,
+            'role_id' => ($user_id == 201) ? 5 : rand(1,4),
             'created_at' => now(),
             'updated_at' => now(),
         ];

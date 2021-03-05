@@ -1,0 +1,277 @@
++--------+----------+------------------------+---------------------+------------------------------------------------------------------------+--------------------------+
+| Domain | Method   | URI                    | Name                | Action                                                                 | Middleware               |
++--------+----------+------------------------+---------------------+------------------------------------------------------------------------+--------------------------+
+|        | GET|HEAD | /                      | home                | App\Http\Controllers\DashboardController@index                         | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | api/user               |                     | Closure                                                                | api                      |
+|        |          |                        |                     |                                                                        | auth:api                 |
+|        | GET|HEAD | companies              | companies.all       | App\Http\Controllers\Company\CompanyController@index                   | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | companies/datatable    | companies.datatable | App\Http\Controllers\Company\CompanyController@datatableIndex          | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | POST     | company                | company.store       | App\Http\Controllers\Company\CompanyController@store                   | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | company/create         | company.create      | App\Http\Controllers\Company\CompanyController@create                  | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | DELETE   | company/{id}           | company.delete      | App\Http\Controllers\Company\CompanyController@destroy                 | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | PUT      | company/{id}           | company.update      | App\Http\Controllers\Company\CompanyController@update                  | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | company/{id}           | company.show        | App\Http\Controllers\Company\CompanyController@show                    | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | company/{id}/edit      | company.edit        | App\Http\Controllers\Company\CompanyController@edit                    | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | dtlocalization         | dtlocalization      | App\Http\Controllers\DashboardController@dtlocalization                | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | POST     | login                  |                     | App\Http\Controllers\Auth\LoginController@login                        | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | guest                    |
+|        | GET|HEAD | login                  | login               | App\Http\Controllers\Auth\LoginController@showLoginForm                | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | guest                    |
+|        | POST     | logout                 | logout              | App\Http\Controllers\Auth\LoginController@logout                       | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        | POST     | order                  | order.store         | App\Http\Controllers\Order\OrderController@store                       | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | order/create           | order.create        | App\Http\Controllers\Order\OrderController@create                      | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | order/{id}             | order.show          | App\Http\Controllers\Order\OrderController@show                        | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | DELETE   | order/{id}             | order.delete        | App\Http\Controllers\Order\OrderController@destroy                     | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | PUT      | order/{id}             | order.update        | App\Http\Controllers\Order\OrderController@update                      | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | order/{id}/edit        | order.edit          | App\Http\Controllers\Order\OrderController@edit                        | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | orders                 | orders.all          | App\Http\Controllers\Order\OrderController@index                       | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | orders/datatable       | orders.datatable    | App\Http\Controllers\Order\OrderController@datatableIndex              | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | POST     | password/confirm       |                     | App\Http\Controllers\Auth\ConfirmPasswordController@confirm            | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | password/confirm       | password.confirm    | App\Http\Controllers\Auth\ConfirmPasswordController@showConfirmForm    | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | POST     | password/email         | password.email      | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail  | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        | POST     | password/reset         | password.update     | App\Http\Controllers\Auth\ResetPasswordController@reset                | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        | GET|HEAD | password/reset         | password.request    | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        | GET|HEAD | password/reset/{token} | password.reset      | App\Http\Controllers\Auth\ResetPasswordController@showResetForm        | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        | POST     | product                | product.store       | App\Http\Controllers\Product\ProductController@store                   | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | product/create         | product.create      | App\Http\Controllers\Product\ProductController@create                  | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | product/{id}           | product.show        | App\Http\Controllers\Product\ProductController@show                    | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | PUT      | product/{id}           | product.update      | App\Http\Controllers\Product\ProductController@update                  | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | DELETE   | product/{id}           | product.delete      | App\Http\Controllers\Product\ProductController@destroy                 | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | product/{id}/edit      | product.edit        | App\Http\Controllers\Product\ProductController@edit                    | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | products               | products.all        | App\Http\Controllers\Product\ProductController@index                   | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | products/datatable     | products.datatable  | App\Http\Controllers\Product\ProductController@datatableIndex          | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | profile                | user.profile        | App\Http\Controllers\User\UserController@profile                       | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | profile/log            | user.log            | App\Http\Controllers\User\UserController@log                           | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | profile/settings       | user.settings       | App\Http\Controllers\User\UserController@settings                      | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | POST     | storage                | storage.store       | App\Http\Controllers\Storage\StorageController@store                   | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | storage/create         | storage.create      | App\Http\Controllers\Storage\StorageController@create                  | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | DELETE   | storage/{id}           | storage.delete      | App\Http\Controllers\Storage\StorageController@destroy                 | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | PUT      | storage/{id}           | storage.update      | App\Http\Controllers\Storage\StorageController@update                  | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | storage/{id}           | storage.show        | App\Http\Controllers\Storage\StorageController@show                    | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | storage/{id}/edit      | storage.edit        | App\Http\Controllers\Storage\StorageController@edit                    | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | storages               | storages.all        | App\Http\Controllers\Storage\StorageController@index                   | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
+|        | GET|HEAD | storages/datatable     | storages.datatable  | App\Http\Controllers\Storage\StorageController@datatableIndex          | web                      |
+|        |          |                        |                     |                                                                        | localeSessionRedirect    |
+|        |          |                        |                     |                                                                        | localizationRedirect     |
+|        |          |                        |                     |                                                                        | localeViewPath           |
+|        |          |                        |                     |                                                                        | cachedCategoryHiyerarchy |
+|        |          |                        |                     |                                                                        | auth                     |
++--------+----------+------------------------+---------------------+------------------------------------------------------------------------+--------------------------+

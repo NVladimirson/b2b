@@ -41,6 +41,67 @@ use App\Services\Miscellaneous;
 class ProductController extends Controller
 {
 
+    public function datatableIndex(Request $request){
+      $products = Product::with(['names']);
+      $language = Miscellaneous::getLang();
+      return datatables()
+      ->eloquent($products)
+      ->addColumn('name', function (Product $product)  use ($language){
+        $product_info = $product->names->firstWhere('language', $language);
+        $url = route('product.show', ['id' => $product_info->id]);
+        return '<a href="'.$url.'">'.$product_info->name.'</a>';
+      })
+      ->addColumn('article', function (Product $product) {
+        return $product->article;
+      })
+      ->addColumn('description', function (Product $product) {
+        return $product->description;
+      })
+      ->addColumn('category', function (Product $product) use ($language){
+        $category = $product->category_name->firstWhere('language', $language);
+
+        return '<a href="'.$category->id.'">'.$category->name.'</a>';
+        // foreach($product->category_name as $category){
+        //   '<p>'.'<a href="#">'.$category->name.'</a>'.'</p>';
+        // }
+      })
+      ->addColumn('storages', function (Product $product) use ($language){
+        $storages = $product->storages->pluck('names','id')->map(function ($item, $key) use ($language){
+          foreach($item as $data){
+            if($data->language == $language){
+              return $data;
+            }
+          }
+          return '';
+      });
+      $html = '<table style="padding-left:50px;width: 100%">';
+      foreach($storages as $storage){
+        $html .= '<tr>';
+        $html .= '<td><div class="text-center">'.'<a href="'.$storage->id.'">'.$storage->name.'</a>'.'</div></td>';
+        $html .= '
+        <td>
+        <div class="text-center">
+        <h4 class="small font-weight-bold">'.__('product.show.product_storages.add_to_cart').'</h4>
+        <a href="#"><i class="fas fa-cart-arrow-down"></i></a>
+        </div>
+        </td>
+        ';
+        $html .= '
+        <td>
+        <div class="text-center">
+        <h4 class="small font-weight-bold">'.__('product.show.product_storages.add_to_wishlist').'</h4>
+        <a href="#"><i class="far fa-heart"></i></a>
+        </div>
+        </td>
+        ';
+        $html .= '</tr>';
+      } 
+      $html .= '</table>';
+      return $html;
+      })
+      ->rawColumns(['name','category','storages'])
+      ->toJson();
+    }
 
     public function index(){
          $language = Miscellaneous::getLang();
@@ -101,68 +162,14 @@ class ProductController extends Controller
       );
     }
 
-    public function datatableIndex(Request $request){
-      $products = Product::with(['names']);
-      $language = Miscellaneous::getLang();
-      return datatables()
-      ->eloquent($products)
-      ->addColumn('name', function (Product $product)  use ($language){
-        $product_info = $product->names->firstWhere('language', $language);
-        $url = route('product.show', ['id' => $product_info->id]);
-        return '<a href="'.$url.'">'.$product_info->name.'</a>';
-      })
-      ->addColumn('article', function (Product $product) {
-        return $product->article;
-      })
-      ->addColumn('description', function (Product $product) {
-        return $product->description;
-      })
-      ->addColumn('category', function (Product $product) use ($language){
-        $category = $product->category_name->firstWhere('language', $language);
+    public function store(Request $request){
 
-        return '<a href="'.$category->id.'">'.$category->name.'</a>';
-        // foreach($product->category_name as $category){
-        //   '<p>'.'<a href="#">'.$category->name.'</a>'.'</p>';
-        // }
-      })
-      ->addColumn('storages', function (Product $product) use ($language){
-        $storages = $product->storages->pluck('names','id')->map(function ($item, $key) use ($language){
-           foreach($item as $data){
-             if($data->language == $language){
-               return $data;
-             }
-           }
-          return '';
-      });
-      $html = '<table style="padding-left:50px;width: 100%">';
-      foreach($storages as $storage){
-        $html .= '<tr>';
-        $html .= '<td><div class="text-center">'.'<a href="'.$storage->id.'">'.$storage->name.'</a>'.'</div></td>';
-        $html .= '
-        <td>
-        <div class="text-center">
-        <h4 class="small font-weight-bold">'.__('product.show.product_storages.add_to_cart').'</h4>
-        <a href="#"><i class="fas fa-cart-arrow-down"></i></a>
-        </div>
-        </td>
-        ';
-        $html .= '
-        <td>
-        <div class="text-center">
-        <h4 class="small font-weight-bold">'.__('product.show.product_storages.add_to_wishlist').'</h4>
-        <a href="#"><i class="far fa-heart"></i></a>
-        </div>
-        </td>
-        ';
-        $html .= '</tr>';
-      } 
-      $html .= '</table>';
-      return $html;
-      })
-      ->rawColumns(['name','category','storages'])
-      ->toJson();
     }
 
+    public function create(Request $request){
+
+    }
+    
     public function show(Request $request, $id){
       $language = Miscellaneous::getLang();
       $product = Product::with('options.option_values.names','options.option_values.option.names')->find($id);
@@ -186,6 +193,18 @@ class ProductController extends Controller
       $storage_products = $product->storage_products;
 
       return view('products.show',compact('product','storage_products','storage_name_infos','product_options'));
+    }
+
+    public function edit(Request $request, $id){
+
+    }
+
+    public function update(Request $request, $id){
+
+    }
+
+    public function destroy($id){
+
     }
 
     public function test(){

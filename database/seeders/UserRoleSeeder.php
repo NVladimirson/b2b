@@ -15,8 +15,8 @@ class UserRoleSeeder extends Seeder
      */
     public function run()
     {
-      // \App\Models\User\UserPermission::factory(10)->create();
-      //  Cache::pull('counter');
+      UserRole::factory(201)->create();
+       Cache::pull('counter');
       //  UserPermission::create([
       //    'user_id' => 11,
       //    'admin' => 1,
