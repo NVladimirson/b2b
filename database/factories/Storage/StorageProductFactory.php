@@ -4,6 +4,7 @@ namespace Database\Factories\Storage;
 
 use App\Models\Storage\StorageProduct;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Cache;
 
 class StorageProductFactory extends Factory
 {
@@ -21,13 +22,13 @@ class StorageProductFactory extends Factory
      */
     public function definition()
     {
-        if( (\Cache::get('counter') == null) ){
-          \Cache::set('counter',1);
+        if( (Cache::get('counter') == null) ){
+          Cache::set('counter',1);
         }
-        $i = \Cache::get('counter');
+        $i = Cache::get('counter');
         $storage_id = ceil($i/10);
-        \Cache::set('counter',$i+1);
-        $prices = \Cache::get('prices');
+        Cache::set('counter',$i+1);
+        $prices = Cache::get('prices');
         return [
           'product_id' => rand(1,1000),
           'storage_id' => $storage_id,

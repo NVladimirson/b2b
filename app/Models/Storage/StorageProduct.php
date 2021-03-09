@@ -17,4 +17,8 @@ class StorageProduct extends Model
     public function product(){
       return $this->hasOne(Product::class, 'id', 'product_id');
     }
+
+    public function order_items(){
+      return $this->hasMany('App\Models\Order\OrderItem','storage_product_id');
+  }
 }

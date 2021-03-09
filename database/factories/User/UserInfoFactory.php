@@ -36,7 +36,7 @@ class UserInfoFactory extends Factory
           //     Cache::set('counter',$users);
           //     return strval($value);
           // },
-          'user_id' => rand(1,11),
+          'user_id' => rand(199,201),
           'field' => $this->faker->realText(10,1),
           'value' => $this->faker->realText(10,1),
           'created_at' => now(),

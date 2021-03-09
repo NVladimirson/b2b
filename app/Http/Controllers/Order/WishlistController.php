@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
-use App\Models\vfs;
 use Illuminate\Http\Request;
 
 class WishlistController extends Controller
 {
+
+    public function showWishlist(Request $request){
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,10 +46,10 @@ class WishlistController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\vfs  $vfs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(vfs $vfs)
+    public function show($id)
     {
         //
     }
@@ -53,10 +57,10 @@ class WishlistController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\vfs  $vfs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(vfs $vfs)
+    public function edit($id)
     {
         //
     }
@@ -65,10 +69,10 @@ class WishlistController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\vfs  $vfs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, vfs $vfs)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +80,10 @@ class WishlistController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\vfs  $vfs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(vfs $vfs)
+    public function destroy($id)
     {
         //
     }

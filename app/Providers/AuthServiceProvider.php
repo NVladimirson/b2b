@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('able_to_manage_content_storages', function(){
-            return intval(auth()->user()->getRole->getRolePermission->content_storages);
+            return intval(auth()->user()->getRole->getRolePermission->manage_content_storages);
         });
 
         Gate::define('admin', function(){

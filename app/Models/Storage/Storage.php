@@ -14,17 +14,19 @@ class Storage extends Model
         return $this->hasMany('App\Models\Storage\StorageName','storage_id');
     }
 
-    public function storage_companies(){
-      return $this->hasMany('App\Models\Company\CompanyStorage','storage_id');
+    public function storage_company(){
+      return $this->hasOne('App\Models\Company\CompanyStorage','storage_id');
     }
 
     public function storage_products(){
       return $this->hasMany('App\Models\Storage\StorageProduct','storage_id');
     }
 
-    public function getLocalizedNameAttribute($value)
+    public function getLocalizedNameAttribute($language = '')
     {
+      if(!$language){
         $language = Miscellaneous::getLang();
-        return $this->names()->firstWhere('language',$language)->name;
+      }
+      return $this->names()->firstWhere('language',$language)->name;
     }
 }

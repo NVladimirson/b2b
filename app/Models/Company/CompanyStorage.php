@@ -17,6 +17,7 @@ class CompanyStorage extends Model
     }
 
     public function company(){
-        return $this->hasOne('App\Models\Company\Company','company_id');
+        return $this->belongsTo('App\Models\Company\Company','company_id');
     }
+
 }

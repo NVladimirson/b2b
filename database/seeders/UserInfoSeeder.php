@@ -14,8 +14,8 @@ class UserInfoSeeder extends Seeder
      */
     public function run()
     {
-      Cache::set('counter', NULL);
-      \App\Models\User\UserInfo::factory(100)->create();
-      Cache::pull('counter');
+      // Cache::set('counter', NULL);
+      // \App\Models\User\UserInfo::factory(5)->create();
+      // Cache::pull('counter');
     }
 }

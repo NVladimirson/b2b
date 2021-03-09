@@ -15,13 +15,41 @@ class UserRoleSeeder extends Seeder
      */
     public function run()
     {
-      UserRole::factory(201)->create();
-       Cache::pull('counter');
-      //  UserPermission::create([
-      //    'user_id' => 11,
-      //    'admin' => 1,
-      //    'created_at' => now(),
-      //    'updated_at' => now()
-      //  ])->save();
+      // UserRole::factory(201)->create();
+      //  Cache::pull('counter');
+        UserRole::create([
+            'user_id' => 1,
+            'role_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+       ])->save();
+
+      UserRole::create([
+          'user_id' => 2,
+          'role_id' => 2,
+          'created_at' => now(),
+          'updated_at' => now(),
+      ])->save();
+
+        UserRole::create([
+          'user_id' => 3,
+          'role_id' => 3,
+          'created_at' => now(),
+          'updated_at' => now(),
+      ])->save();
+
+      UserRole::create([
+        'user_id' => 4,
+        'role_id' => 4,
+        'created_at' => now(),
+        'updated_at' => now(),
+      ])->save();
+
+      UserRole::create([
+        'user_id' => 5,
+        'role_id' => 5,
+        'created_at' => now(),
+        'updated_at' => now(),
+      ])->save();
     }
 }

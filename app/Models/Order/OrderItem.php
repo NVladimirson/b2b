@@ -9,7 +9,7 @@ class OrderItem extends Model
 {
     use HasFactory;
 
-    public function product(){
-        return $this->belongsTo('App\Models\Product\Product','product_id');
+    public function storage_product(){
+        return $this->belongsTo('App\Models\Storage\StorageProduct','storage_product_id');
     }
 }

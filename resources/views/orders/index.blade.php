@@ -35,6 +35,9 @@
                     <thead>
                         <tr>
                         <th>@lang('order.index.table_header.products')</th>
+                            @can('able_to_manage_orders')
+                            <th>User</th>
+                            @endcan
                             <th>@lang('order.index.table_header.shipping')</th>
                             <th>@lang('order.index.table_header.public_no')</th>
                             <th>@lang('order.index.table_header.to_pay')</th>
@@ -45,6 +48,9 @@
                     <tfoot>
                         <tr>
                             <th>@lang('order.index.table_header.products')</th>
+                            @can('able_to_manage_orders')
+                            <th>User</th>
+                            @endcan
                             <th>@lang('order.index.table_header.shipping')</th>
                             <th>@lang('order.index.table_header.public_no')</th>
                             <th>@lang('order.index.table_header.to_pay')</th>
@@ -169,6 +175,9 @@ function details ( d ) {
                 "data":           null,
                 "defaultContent": '<div class="text-center"><i class="fa fa-plus"></i></div>'
             },
+            @can('able_to_manage_orders')
+            { "data": "customer" },
+            @endcan
             { "data": "shipping" },
             { "data": "public_no" },
             { "data": "to_pay" },

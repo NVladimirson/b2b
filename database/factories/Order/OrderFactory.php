@@ -21,14 +21,15 @@ class OrderFactory extends Factory
      */
     public function definition()
     {
-        $statuses = ['awaits','formed','payed'];
+        //$statuses = ['awaits','formed','payed'];
+        $user_ids = [1,2,3,5];
         return [
             'shipping_id' => rand(1,3),
-            'user_id' => rand(0,9) ? 11 : rand(1,10),
+            'user_id' => $user_ids[array_rand($user_ids)],
             'public_number' => $this->faker->isbn13,
             'created_at' => now(),
-            'to_pay' => rand(1,1000) + rand(1,100)/100,
-            'status' => $statuses[rand(0,2)],
+            'to_pay' => 0,
+            'status' => 'awaits',
             'updated_at' => now()
         ];
     }

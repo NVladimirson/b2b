@@ -45,9 +45,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 		Route::post('/order','App\Http\Controllers\Order\OrderController@store')->name('order.store');
 		Route::get('/order/create','App\Http\Controllers\Order\OrderController@create')->name('order.create');
 		Route::get('/order/{id}','App\Http\Controllers\Order\OrderController@show')->name('order.show');
-		Route::put('/order/{id}','App\Http\Controllers\Order\OrderController@update')->name('order.update');
+		Route::patch('/order/{id}','App\Http\Controllers\Order\OrderController@update')->name('order.update');
 		Route::delete('/order/{id}','App\Http\Controllers\Order\OrderController@destroy')->name('order.delete');
-		Route::get('/order/{id}/edit','App\Http\Controllers\Order\OrderController@edit')->name('order.edit');
+		Route::get('/order/{id}/process','App\Http\Controllers\Order\OrderController@edit')->name('order.process');
+
+		//cart
+		Route::get('/cart','App\Http\Controllers\Order\CartController@showCart')->name('cart.show');
+
+		//cart
+		Route::get('/wishlist','App\Http\Controllers\Order\WishlistController@showWishlist')->name('wishlist.show');		
 
 		//storage
 		Route::get('/storages/datatable','\App\Http\Controllers\Storage\StorageController@datatableIndex')->name('storages.datatable');

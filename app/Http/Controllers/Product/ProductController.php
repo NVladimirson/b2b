@@ -66,18 +66,19 @@ class ProductController extends Controller
         // }
       })
       ->addColumn('storages', function (Product $product) use ($language){
-        $storages = $product->storages->pluck('names','id')->map(function ($item, $key) use ($language){
-          foreach($item as $data){
-            if($data->language == $language){
-              return $data;
-            }
-          }
-          return '';
-      });
+        $storage_products = $product->storage_products->map(function ($item, $key){
+          $item->storage_name = $item->storage->localized_name;
+          return $item;
+        });
       $html = '<table style="padding-left:50px;width: 100%">';
-      foreach($storages as $storage){
+      $html .= '<tr class="text-center">';
+      $html .= '<th>'.'Storage'.'</th><th>'.'Price'.'</th><th>'.'Amount'.'</th><th>'.'Add to Order'.'</th><th>'.'Add To Wishlist'.'</th>';
+      $html .= '</tr>';
+      foreach($storage_products as $storage_product){
         $html .= '<tr>';
-        $html .= '<td><div class="text-center">'.'<a href="'.$storage->id.'">'.$storage->name.'</a>'.'</div></td>';
+        $html .= '<td><div class="text-center">'.'<a href="'.$storage_product->storage_id.'">'.$storage_product->storage_name.'</a>'.'</div></td>';
+        $html .= '<td><div class="text-center">'.$storage_product->price.'</div></td>';
+        $html .= '<td><div class="text-center">'.$storage_product->amount.'</div></td>';
         $html .= '
         <td>
         <div class="text-center">

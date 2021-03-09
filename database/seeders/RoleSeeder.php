@@ -30,7 +30,7 @@ class RoleSeeder extends Seeder
 
         Role::create([
             'id' => 3,
-            'role' => 'admin',
+            'role' => 'storage_manager',
             'created_at' => now(),
             'updated_at' => now()
         ])->save();

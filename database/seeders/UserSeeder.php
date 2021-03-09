@@ -15,7 +15,44 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-       \App\Models\User::factory(200)->create();
+      //  \App\Models\User::factory(200)->create();
+
+      \App\Models\User::create([
+        'name' => 'Customer',
+        'email'=>'customer@test.customer',
+        'password' => '$2y$10$FO/WYrR.WMvwdMqqHPSCdO.GwkTdhFDPMpcJtLvZxKV7BARGF884S',
+        'company_id' => rand(1,100),
+        'created_at' => '2021-02-22 07:10:00',
+        'updated_at' => '2021-02-22 07:10:00'
+        ])->save();
+
+      \App\Models\User::create([
+        'name' => 'Seller',
+        'email'=>'seller@test.seller',
+        'password' => '$2y$10$FO/WYrR.WMvwdMqqHPSCdO.GwkTdhFDPMpcJtLvZxKV7BARGF884S',
+        'company_id' => rand(1,100),
+        'created_at' => '2021-02-22 07:10:00',
+        'updated_at' => '2021-02-22 07:10:00'
+        ])->save();
+
+      \App\Models\User::create([
+        'name' => 'Storage Manager',
+        'email'=>'storagemanager@test.storagemanager',
+        'password' => '$2y$10$FO/WYrR.WMvwdMqqHPSCdO.GwkTdhFDPMpcJtLvZxKV7BARGF884S',
+        'company_id' => rand(1,100),
+        'created_at' => '2021-02-22 07:10:00',
+        'updated_at' => '2021-02-22 07:10:00'
+        ])->save();
+
+      \App\Models\User::create([
+        'name' => 'Spectator',
+        'email'=>'spectator@test.spectator',
+        'password' => '$2y$10$FO/WYrR.WMvwdMqqHPSCdO.GwkTdhFDPMpcJtLvZxKV7BARGF884S',
+        'company_id' => rand(1,100),
+        'created_at' => '2021-02-22 07:10:00',
+        'updated_at' => '2021-02-22 07:10:00'
+        ])->save();
+
       \App\Models\User::create([
         'name' => 'Super Admin',
         'email'=>'super@test.admin',
@@ -24,7 +61,8 @@ class UserSeeder extends Seeder
         'created_at' => '2021-02-22 07:10:00',
         'updated_at' => '2021-02-22 07:10:00'
         ])->save();
-        Cache::pull('counter');
+        
+        // Cache::pull('counter');
 
       // \App\Models\User::create([
       //   'name' => $this->faker->name,

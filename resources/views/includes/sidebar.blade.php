@@ -113,8 +113,8 @@
             <h6 class="collapse-header">@lang('layout_sidebar_topbar.sidebar.orders.actions'):</h6>
             @can('able_to_order')
             <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.all')</a>
-            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.cart')</a>
-            <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.wishlist')</a>
+            <a class="collapse-item" href="{{route('cart.show')}}">@lang('layout_sidebar_topbar.sidebar.orders.cart')</a>
+            <a class="collapse-item" href="{{route('wishlist.show')}}">@lang('layout_sidebar_topbar.sidebar.orders.wishlist')</a>
             @endcan
             @can('able_to_manage_orders')
             <a class="collapse-item" href="{{route('orders.all')}}">@lang('layout_sidebar_topbar.sidebar.orders.all_for_company', ['company' => auth()->user()->company_name])</a>

@@ -40,11 +40,14 @@ class Product extends Model
       return $this->hasMany('App\Models\Option\OptionProduct','product_id');
     }
 
-    public function getLocalizedNameAttribute($value)
+    public function getLocalizedNameAttribute($language)
     {
+      if(!$language){
         $language = Miscellaneous::getLang();
-        return $this->names()->firstWhere('language',$language)->name;
+      }
+      return $this->names()->firstWhere('language',$language)->name;
     }
+    
     // public function storages(){
     //   // return $this->hasManyThrough('App\Models\Storage\Storage','category_id','category_id');
     //   return $this->hasManyThrough(

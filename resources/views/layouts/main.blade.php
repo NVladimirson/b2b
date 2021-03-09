@@ -46,7 +46,7 @@
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
 
-    <link rel="stylesheet" href="dist/themes/default/style.min.css" />
+    <!-- <link rel="stylesheet" href="/dist/themes/default/style.min.css" /> -->
 
     <!-- Page level plugins -->
     <!-- <script src="/vendor/chart.js/Chart.min.js"></script> -->

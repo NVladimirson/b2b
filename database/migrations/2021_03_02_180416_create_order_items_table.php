@@ -16,9 +16,10 @@ class CreateOrderItemsTable extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('storage_product_id');
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('storage_product_id')->references('id')->on('storage_products');
+            $table->decimal('to_pay',10,2)->default(1.00);
             $table->unsignedInteger('quantity')->default(1);
             $table->timestamps();
         });

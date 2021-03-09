@@ -22,19 +22,19 @@ class UserRoleFactory extends Factory
      */
     public function definition()
     {
-        if( (Cache::get('counter') == null) ){
-          Cache::set('counter',1);
-        }
+        // if( (Cache::get('counter') == null) ){
+        //   Cache::set('counter',1);
+        // }
 
-        $user_id = Cache::get('counter');
-        Cache::set('counter',$user_id + 1);
+        // $user_id = Cache::get('counter');
+        // Cache::set('counter',$user_id + 1);
         
 
-        return [
-            'user_id' => $user_id,
-            'role_id' => ($user_id == 201) ? 5 : rand(1,4),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
+        // return [
+        //     'user_id' => $user_id,
+        //     'role_id' => ($user_id == 201) ? 5 : rand(1,4),
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ];
     }
 }

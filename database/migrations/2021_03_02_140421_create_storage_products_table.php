@@ -19,7 +19,7 @@ class CreateStorageProductsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->unsignedBigInteger('storage_id');
             $table->foreign('storage_id')->references('id')->on('storages');
-            $table->decimal('price',10,2)->default(0);
+            $table->decimal('price',10,2)->default(1.00);
             $table->unsignedMediumInteger('amount')->default(1);
             $table->timestamps();
         });
