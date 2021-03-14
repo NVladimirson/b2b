@@ -36,20 +36,48 @@ use Illuminate\Support\Arr;
 use App\Events\NewMessage;
 use DataTables;
 use App\Services\Miscellaneous;
-
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
 
     public function datatableIndex(Request $request){
+
       $products = Product::with(['names']);
       $language = Miscellaneous::getLang();
+      $search = trim($request->search['value']);
+      $selected_categories = $request->selected_categories;
+      
+      if(strlen($search)){
+        $products = $products->whereHas('names', function($product) use($search, $language){
+          $product->where([
+            ['language',$language],
+            ['name', 'like',"%" . $search . "%"]
+          ]);
+        });
+      }
+
+      if(Str::of($selected_categories)->trim()->isNotEmpty()){
+        $selected_categories = explode(',',$request->selected_categories);
+        $products = $products->whereHas('category', function($category) use($selected_categories){
+          $category->whereIn('id', $selected_categories);
+        });
+      }
+
+      //info($request->all());
+
       return datatables()
       ->eloquent($products)
-      ->addColumn('name', function (Product $product)  use ($language){
+      ->addColumn('name', function (Product $product)  use ($language,$search){
         $product_info = $product->names->firstWhere('language', $language);
-        $url = route('product.show', ['id' => $product_info->id]);
-        return '<a href="'.$url.'">'.$product_info->name.'</a>';
+        $url = route('product.show', ['id' => $product->id]);
+        if(Str::of($search)->isEmpty()){
+          return '<a href="'.$url.'">'.$product_info->name.'</a>';
+        }
+        else{
+          return '<a href="'.$url.'">'.Miscellaneous::highlightsubstr($product_info->name,$search).'</a>';
+        }
       })
       ->addColumn('article', function (Product $product) {
         return $product->article;
@@ -68,38 +96,54 @@ class ProductController extends Controller
       ->addColumn('storages', function (Product $product) use ($language){
         $storage_products = $product->storage_products->map(function ($item, $key){
           $item->storage_name = $item->storage->localized_name;
+          $item->company = $item->storage->storage_company->company;
+          $item->product_name = $item->product->localized_name;
           return $item;
         });
       $html = '<table style="padding-left:50px;width: 100%">';
       $html .= '<tr class="text-center">';
-      $html .= '<th>'.'Storage'.'</th><th>'.'Price'.'</th><th>'.'Amount'.'</th><th>'.'Add to Order'.'</th><th>'.'Add To Wishlist'.'</th>';
+      $html .= '<th>'.'Company'.'</th><th>'.'Storage'.'</th><th>'.'Price'.'</th><th>'.'Amount'.'</th>';
+      if(Gate::allows('able_to_order')){
+        $html .= '<th>'.'Add to Order'.'</th><th>'.'Add To Wishlist'.'</th>';
+      }
       $html .= '</tr>';
       foreach($storage_products as $storage_product){
         $html .= '<tr>';
+        $html .= '<td><div class="text-center">'.$storage_product->company->name.'</a>'.'</div></td>';
         $html .= '<td><div class="text-center">'.'<a href="'.$storage_product->storage_id.'">'.$storage_product->storage_name.'</a>'.'</div></td>';
         $html .= '<td><div class="text-center">'.$storage_product->price.'</div></td>';
         $html .= '<td><div class="text-center">'.$storage_product->amount.'</div></td>';
-        $html .= '
-        <td>
-        <div class="text-center">
-        <h4 class="small font-weight-bold">'.__('product.show.product_storages.add_to_cart').'</h4>
-        <a href="#"><i class="fas fa-cart-arrow-down"></i></a>
-        </div>
-        </td>
-        ';
-        $html .= '
-        <td>
-        <div class="text-center">
-        <h4 class="small font-weight-bold">'.__('product.show.product_storages.add_to_wishlist').'</h4>
-        <a href="#"><i class="far fa-heart"></i></a>
-        </div>
-        </td>
-        ';
+        if(Gate::allows('able_to_order')){
+          $html .= '
+          <td>
+          <div class="text-center">
+          <h4 class="small font-weight-bold">'.__('product.show.product_storages.add_to_cart').'</h4>
+          <a href="#" data-toggle="modal" data-target="#orderModal" 
+          data-company_id="'.$storage_product->company->id.'"
+          data-company_name="'.$storage_product->company->name.'"
+          data-product_id="'.$storage_product->storage_id.'"
+          data-product_name="'.$storage_product->product_name.'"
+          >
+          <i class="fas fa-cart-arrow-down add_to_order"></i>
+          </a>
+          </div>
+          </td>
+          ';
+          $html .= '
+          <td>
+          <div class="text-center">
+          <h4 class="small font-weight-bold">'.__('product.show.product_storages.add_to_wishlist').'</h4>
+          <a href="#"><i class="far fa-heart"></i></a>
+          </div>
+          </td>
+          ';
+        }
         $html .= '</tr>';
       } 
       $html .= '</table>';
       return $html;
       })
+      // ->orderColumns(['name'], '-name $1')
       ->rawColumns(['name','category','storages'])
       ->toJson();
     }
@@ -208,8 +252,8 @@ class ProductController extends Controller
 
     }
 
-    public function test(){
-      return view('datatable-test');
+    public function test(Request $request){
+      
     }
 
     public function test_ajax(){

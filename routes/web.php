@@ -28,6 +28,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 	]],function() {
 		Route::get('/dtlocalization','App\Http\Controllers\DashboardController@dtlocalization')->name('dtlocalization');
 		Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('home');
+		Route::get('/search_global', 'App\Http\Controllers\Search\SearchController@globalSearch')->name('search.global');
 
 		//products
 		Route::get('/products/datatable','\App\Http\Controllers\Product\ProductController@datatableIndex')->name('products.datatable');
@@ -94,7 +95,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 		// Route::get('/companies', 'App\Http\Controllers\Company\CompanyController@index')->name('companies');
 		// Route::get('/company/{id}', 'App\Http\Controllers\Company\CompanyController@show')->name('company.show');
 
-		// Route::get('/test', 'App\Http\Controllers\Product\ProductController@test')->name('test');
+		//Route::get('/test', 'App\Http\Controllers\Product\ProductController@test')->name('test');
 		// Route::get('/test-ajax', 'App\Http\Controllers\Product\ProductController@test_ajax')->name('test_ajax');
 		// Route::get('/test-ajax2', 'App\Http\Controllers\Product\ProductController@test_ajax')->name('test_ajax');
 

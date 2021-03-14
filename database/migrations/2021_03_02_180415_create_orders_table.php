@@ -17,7 +17,9 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('shipping_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('company_id');
             $table->text('public_number');
+            $table->foreign('company_id')->references('id')->on('companies');
             $table->foreign('shipping_id')->references('id')->on('shippings');
             $table->foreign('user_id')->references('id')->on('users');
             $table->decimal('to_pay',10,2)->default(0);

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Services;
-use LaravelLocalization;
+
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class Miscellaneous
 {
@@ -43,6 +44,30 @@ class Miscellaneous
 				$res .= '</div>';
 			}
 
+		}
+
+		public static function getOrderCode($company_id){
+			$date = now()->toArray();
+			$code = $date['day'].$date['month'].$date['year'].$date['hour'].$date['minute'].$date['second'].'-'.auth()->user()->company_id.'/'.$company_id;
+			return $code;
+		}
+
+		public static function highlightSubstr($string, $tofind, $tag = 'b'){
+			$substr_arr = explode($tofind,$string);
+			if(!isset($substr_arr[0])){
+				return $string;
+			}
+			else{
+				if($substr_arr[0] == ''){
+					return '<'.$tag.'>'.$tofind.'</'.$tag.'>'.$substr_arr[1];
+				}
+				else if($substr_arr[1] == ''){
+					return $substr_arr[0].'<'.$tag.'>'.$tofind.'</'.$tag.'>';
+				}
+				else{
+					return $substr_arr[0].'<'.$tag.'>'.$tofind.'</'.$tag.'>'.$substr_arr[1];
+				}
+			}
 		}
 
 }

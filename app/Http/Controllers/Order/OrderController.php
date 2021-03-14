@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company\Company;
 use App\Models\Order\Order;
+use App\Models\Order\OrderItem;
+use App\Models\Storage\StorageProduct;
 use App\Models\User;
 use App\Services\Miscellaneous;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate as Gate;
 
 class OrderController extends Controller
@@ -19,17 +23,7 @@ class OrderController extends Controller
         }
         if(Gate::allows('able_to_manage_orders')){
             $company_id = auth()->user()->company_id;
-            $orders = Order::with('order_items')->whereHas('order_items', function($orderItems) use ($company_id){
-                $orderItems->whereHas('storage_product', function($storageProduct) use ($company_id){
-                  $storageProduct->whereHas('storage', function($storage) use ($company_id){
-                    $storage->whereHas('storage_company', function($storage_company) use ($company_id){
-                      $storage_company->whereHas('company', function($company) use ($company_id){
-                        $company->where('id', $company_id);
-                      });
-                    });
-                  });
-                });
-              });
+            $orders = Order::with('order_items')->where('company_id', $company_id);
         }
         // if(Gate::denies('able_to_manage_content_storages')){
             
@@ -97,7 +91,7 @@ class OrderController extends Controller
             $order_items_info = $order->order_items->map(function($item,$key) use ($language){
                 return [
                     'quantity' => $item->quantity,
-                    'product_id' => $item->storage_product->product->id,
+                    'product_id' => $item->storage_product->id,
                     'name' => $item->storage_product->product->names->firstWhere('language',$language)->name
                     ];
             });
@@ -141,7 +135,69 @@ class OrderController extends Controller
     }
 
     public function store(Request $request){
-        if (Gate::denies('able_to_order') || Gate::denies('admin')) {
+        if (Gate::allows('able_to_order') || Gate::allows('admin')) {
+
+            $fields = $request->all();
+            unset($fields['_token']);
+
+            $data = [];
+            foreach($fields as $company_product_data => $amount){
+                $order_data = explode("_product_", $company_product_data);
+                $product = $order_data[1];
+                $company = explode("company_", $order_data[0])[1];
+                $data[] = ['storage_product_id' => $product, 'company_id' => $company, 'amount' => $amount];
+            }
+            info(count($data));
+
+            $order_by_companies = [];
+            foreach($data as $product_data){
+              $order_by_companies[$product_data['company_id']][] = Arr::except($product_data, ['company_id']);
+            }
+      
+            $created_orders = [];
+            foreach($order_by_companies as $company_id => $product_order){
+              $order = Order::create([
+                'shipping_id' => 1,
+                'user_id' => auth()->user()->id,
+                'company_id' => $company_id,
+                'public_number' => Miscellaneous::getOrderCode($company_id),
+                'to_pay' => '0.00',
+                'status' => 'formed',
+                'created_at' => now(),
+                'updated_at' => now()
+              ]);
+             
+              foreach($product_order as $order_item){
+                $storage_product = StorageProduct::find($order_item['storage_product_id']);
+                $order_items = OrderItem::create([
+                  'order_id' => $order->id,
+                  'storage_product_id' => $order_item['storage_product_id'],
+                  'to_pay' => $storage_product->price,
+                  'quantity' => $order_item['amount'],
+                  'created_at' => now(),
+                  'updated_at' => now()
+                ]);
+              }
+      
+              $created_orders[] = [
+                'order_id' => $order->id,
+                'public_number' => $order->public_number,
+                'company_id' => $company_id,
+                'company_name' => Company::find($company_id)->name
+              ];
+            }
+            $response = '';
+            foreach($created_orders as $created_order){
+                $response .= '<p><a href="'.route('order.show', ['id' => $created_order['order_id']]).'">'
+                .$created_order['public_number'].
+                ' ('
+                .$created_order['company_name'].')</a></p>';
+            }
+            info(count($created_orders));
+            //$response = '<a href="#">Reponse</a>';
+            return response($response, 200)->header('Content-Type', 'text/plain');
+        }
+        else{
             abort(403);
         }
     }
@@ -169,11 +225,15 @@ class OrderController extends Controller
             $order_items_info = $order->order_items->map(function($item,$key) use ($language){
                 return [
                     'quantity' => $item->quantity,
-                    'product_id' => $item->product->id,
-                    'name' => $item->product->names->firstWhere('language',$language)->name
+                    'product_id' => $item->storage_product->product->id,
+                    'name' => $item->storage_product->product->names->firstWhere('language',$language)->name
                     ];
             });
             $order->order_items_info = $order_items_info;
+
+            $shipping_info = json_decode($order->shipping->info, true);
+            $shipping_name = $shipping_info['name'][$language];
+            $order->shipping = $shipping_name;
 
             if($order->status == 'awaits'){
                 switch ($language) {
@@ -210,11 +270,10 @@ class OrderController extends Controller
                     case 'en':
                         $status = 'Formed';
                 }
+                $order->to_pay = '-';
+                $order->shipping = '-';
             }
             
-            $shipping_info = json_decode($order->shipping->info, true);
-            $shipping_name = $shipping_info['name'][$language];
-            $order->shipping = $shipping_name;
             $order->status = $status;
             return view('orders.show', compact('order'));
         }
@@ -251,14 +310,14 @@ class OrderController extends Controller
         $storage_product_amounts = [];
         foreach($order->order_items as $order_item){
             $total += $order_item->to_pay;
-            $storage_product_amounts[] = [
-                'id' => $order_item->storage_product_id,
-                'amount_to_order' => $order_item->quantity
-            ];
+
+            $storage_product = StorageProduct::find($order_item->storage_product_id);
+            $storage_product->amount = ($storage_product->amount - $order_item->quantity > 0) ? ($storage_product->amount - $order_item->quantity) : 0;
+            $storage_product->save();
         }
-        dd($storage_product_amounts);
+
         $order->update([
-            'status' => 'formed',
+            'status' => 'awaits',
             'to_pay' => $total,
             'updated_at' => now()
         ]);

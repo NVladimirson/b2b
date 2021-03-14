@@ -39,12 +39,57 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
+
+    <script>
+          $( function() {
+            $( "#tags" ).autocomplete({
+            //source: "{{route('search.global')}}",
+            source: function (request, response) {
+                    $.ajax({
+                        url: "{{route('search.global')}}",
+                        data: {'name':request.term},
+                        dataType: "json",
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data,function(value){
+                            return{
+                            id:value.id,
+                            name:value.name
+                        };
+                    })); 
+                        },
+                    });
+                },
+            minLength: 3,
+            response: function (event, ui) {
+                console.log(ui);
+            },
+            create: function() {
+                $( "#tags" ).data('ui-autocomplete')._renderItem  = function (ul, item) {
+                return $( "<li>" )
+                    .addClass("global_search_product")
+                    .attr( "data-id", item.id )
+                    .append( item.name )
+                    .appendTo( ul );
+                };
+			},
+            select: function(event, ui) {
+                console.log(ui);
+                window.location.href = "{{route('products.all')}}".slice(0, -1)+"/"+ui.item.id;
+            },
+        });
+
+  } );
+    </script>
 
     <!-- <link rel="stylesheet" href="/dist/themes/default/style.min.css" /> -->
 

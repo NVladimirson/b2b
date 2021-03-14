@@ -10,9 +10,14 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        'shipping_id',
+        'user_id',
+        'company_id',
+        'public_number',
         'status',
         'to_pay',
-        'updated_at'
+        'updated_at',
+        'created_at'
     ];
 
     public function order_items(){

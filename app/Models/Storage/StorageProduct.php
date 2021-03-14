@@ -20,5 +20,6 @@ class StorageProduct extends Model
 
     public function order_items(){
       return $this->hasMany('App\Models\Order\OrderItem','storage_product_id');
-  }
+    }
+    
 }

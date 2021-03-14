@@ -15,24 +15,25 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\Miscellaneous;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Response;
 
 class DashboardController extends Controller
 {
   public function index()
   {
-    $order = Order::with('order_items')->find(9);
-    $total = 0;
-    $storage_product_amounts = [];
-    foreach($order->order_items as $order_item){
-        $total += $order_item->to_pay;
-        $storage_product_amounts[] = [
-            'id' => $order_item->storage_product_id,
-            'amount_to_order' => $order_item->quantity
-        ];
-    }
-    dd($storage_product_amounts);
-
-    SEOTools::setTitle(trans('dashboard.page_name'));
+  //   $search = '999';
+  //   $products = Product::whereHas('names', function($product) use($search){
+  //     $product->where([
+  //       ['name', 'like',"%" . $search . "%"]
+  //     ]);
+  //   })->take(5)->get()
+  //   ->map(function ($item) {
+  //     return collect(['id' => $item->id, 'name' => $item->localized_name]);
+  //   })->toArray();
+  //   info('DASHBOARD');
+  //   info(Response::json($products));
+  // return Response::json($products);
 
     return view('home');
     }
